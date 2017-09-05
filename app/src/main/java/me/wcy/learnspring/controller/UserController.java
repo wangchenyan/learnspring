@@ -1,5 +1,6 @@
-package me.wcy.learnspring;
+package me.wcy.learnspring.controller;
 
+import me.wcy.learnspring.model.Response;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,14 +13,14 @@ import java.util.Map;
  * Created by wcy on 2017/9/3.
  */
 @Controller
+@RequestMapping("/api")
 public class UserController {
 
     @RequestMapping(value = "/title", method = RequestMethod.GET)
     @ResponseBody
-    public Map getTitle() {
-        System.out.println("get title");
+    public Response getTitle() {
         Map<String, String> map = new HashMap<String, String>();
         map.put("姓名", "王晨彦");
-        return map;
+        return new Response(map);
     }
 }
