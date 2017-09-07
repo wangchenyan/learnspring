@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.wcy.learnspring.dao.UserDAO">
+    <resultMap id="userResultMap" type="me.wcy.learnspring.po.User"/>
+
+    <sql id="userField">
+        id, user_name, password, phone_number, nickname, signature
+    </sql>
+
+    <sql id="userFieldWithoutId">
+        user_name, password, phone_number, nickname, signature
+    </sql>
+
+    <insert id="insert" parameterType="me.wcy.learnspring.po.User">
+        insert into user (<include refid="userFieldWithoutId"/>)
+        values (
+        #{user_name}, #{password}, #{phone_number}, #{nickname}, #{signature}
+        )
+    </insert>
+
+    <select id="query" parameterType="java.lang.String" resultMap="userResultMap">
+        select
+        <include refid="userField"/>
+        from user
+        where user_name=#{user_name}
+    </select>
+
+    <update id="update" parameterType="me.wcy.learnspring.po.User">
+        update user
+        <set>
+            <if test="password!=null">password=#{password},</if>
+            <if test="phone_number!=null">phone_number=#{phone_number},</if>
+            <if test="nickname!=null">nickname=#{nickname},</if>
+            <if test="signature!=null">signature=#{signature},</if>
+        </set>
+        where user_name=#{user_name}
+    </update>
+</mapper>

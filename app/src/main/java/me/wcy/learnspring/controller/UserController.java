@@ -1,13 +1,13 @@
 package me.wcy.learnspring.controller;
 
-import me.wcy.learnspring.model.Response;
+import me.wcy.learnspring.po.User;
+import me.wcy.learnspring.service.UserService;
+import me.wcy.learnspring.vo.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by wcy on 2017/9/3.
@@ -15,12 +15,14 @@ import java.util.Map;
 @Controller
 @RequestMapping("/api")
 public class UserController {
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/title", method = RequestMethod.GET)
     @ResponseBody
     public Response getTitle() {
-        Map<String, String> map = new HashMap<String, String>();
-        map.put("姓名", "王晨彦");
-        return new Response(map);
+        User user = userService.query("wangchenyan");
+        Object result = user == null ? "failed" : user;
+        return new Response(result);
     }
 }

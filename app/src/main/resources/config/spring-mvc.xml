@@ -11,6 +11,7 @@
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <context:component-scan base-package="me.wcy.learnspring.controller"/>
+    <context:component-scan base-package="me.wcy.learnspring.service"/>
 
     <mvc:annotation-driven>
         <mvc:message-converters>

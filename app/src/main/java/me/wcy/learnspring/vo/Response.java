@@ -1,4 +1,4 @@
-package me.wcy.learnspring.model;
+package me.wcy.learnspring.vo;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonInclude;
