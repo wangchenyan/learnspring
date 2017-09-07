@@ -1,5 +1,8 @@
 package me.wcy.learnspring.po;
 
+/**
+ * Created by hzwangchenyan on 2017/9/7.
+ */
 public class User {
     private Integer id;
     private String user_name;

@@ -1,5 +1,6 @@
 package me.wcy.learnspring.service;
 
+import me.wcy.learnspring.common.ServiceRuntimeException;
 import me.wcy.learnspring.po.User;
 
 /**
@@ -7,9 +8,9 @@ import me.wcy.learnspring.po.User;
  */
 public interface UserService {
 
-    int insert(User user);
+    int insert(User user) throws ServiceRuntimeException;
 
-    int update(User user);
+    int update(User user) throws ServiceRuntimeException;
 
-    User query(String user_name);
+    User query(String user_name) throws ServiceRuntimeException;
 }
