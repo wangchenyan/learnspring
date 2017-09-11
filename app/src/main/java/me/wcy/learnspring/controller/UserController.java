@@ -25,11 +25,11 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     public Response register(
-            @RequestParam("user_name") String userName,
-            @RequestParam("password") String password,
-            @RequestParam(value = "phone_number", required = false) String phoneNumber,
-            @RequestParam(value = "nickname", required = false) String nickname,
-            @RequestParam(value = "signature", required = false) String signature
+            @RequestParam("u") String userName,
+            @RequestParam("p") String password,
+            @RequestParam(value = "phone", required = false) String phoneNumber,
+            @RequestParam(value = "nick", required = false) String nickname,
+            @RequestParam(value = "sign", required = false) String signature
     ) {
         if (StringUtils.isBlank(userName) || StringUtils.isBlank(password)) {
             return new Response(ResponseCode.GLOBAL_PARAM_ERROR, "param error");
@@ -53,7 +53,7 @@ public class UserController {
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     @ResponseBody
-    public Response getTitle(@RequestParam("user_name") String userName) {
+    public Response getTitle(@RequestParam("u") String userName) {
         try {
             User user = userService.query(userName);
             if (user != null) {
