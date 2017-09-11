@@ -100,11 +100,14 @@ FLUSH PRIVILEGES;
 mysql> SHOW VARIABLES LIKE 'character%';
 ```
 
-**设置character_set_server编码**
+**设置编码**
 
 编辑/etc/my.cnf，添加
 ```
 [client]
+default-character-set=utf8
+
+[mysql]
 default-character-set=utf8
 
 [mysqld]
@@ -114,8 +117,8 @@ character-set-server=utf8
 ```
 # service mysqld restart
 ```
-
-**设置client、connection、results编码**
+退出，重新连接MySQL
 ```
-mysql> SET NAMES 'utf8';
+mysql> exit
+# mysql -u root -p
 ```
