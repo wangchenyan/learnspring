@@ -2,6 +2,7 @@
 learn spring
 
 ## 配置云主机
+CentOS 6.5
 
 ### 登录云主机
 打开Xshell，并点击新建，根据要求输入相应参数
@@ -20,7 +21,6 @@ learn spring
 ```
 
 ### 安装JDK
-
 yum安装Java
 ```
 # yum list java*
@@ -56,7 +56,6 @@ yum安装Java
 将导出的war包上传至tomcat的webapps目录下，tomcat将自动部署
 
 ### 安装MySQL
-
 1. yum安装mysql
 ```
 # yum install -y mysql-server
@@ -95,13 +94,13 @@ FLUSH PRIVILEGES;
 ```
 
 - 设置MySQL编码
-
 **查看编码**
 ```
 mysql> SHOW VARIABLES LIKE 'character%';
 ```
 
 **设置character_set_server编码**
+
 编辑/etc/my.cnf，添加
 ```
 [client]
