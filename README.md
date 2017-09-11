@@ -94,6 +94,7 @@ FLUSH PRIVILEGES;
 ```
 
 - 设置MySQL编码
+
 **查看编码**
 ```
 mysql> SHOW VARIABLES LIKE 'character%';
