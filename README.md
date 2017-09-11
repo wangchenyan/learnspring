@@ -101,6 +101,7 @@ mysql> SHOW VARIABLES LIKE 'character%';
 ```
 
 - 设置编码
+
 退出MySQL
 ```
 mysql> exit
