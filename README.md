@@ -93,15 +93,19 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OP
 FLUSH PRIVILEGES;
 ```
 
-- 设置MySQL编码
+**设置MySQL编码**
 
-**查看编码**
+- 查看编码
 ```
 mysql> SHOW VARIABLES LIKE 'character%';
 ```
 
-**设置编码**
+- 设置编码
 
+退出MySQL
+```
+mysql> exit
+```
 编辑/etc/my.cnf，添加
 ```
 [client]
@@ -117,8 +121,7 @@ character-set-server=utf8
 ```
 # service mysqld restart
 ```
-退出，重新连接MySQL
+重新连接MySQL
 ```
-mysql> exit
 # mysql -u root -p
 ```
