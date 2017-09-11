@@ -1,5 +1,5 @@
 # learnspring
-learn spring
+Spring学习记录
 
 ## 配置云主机
 CentOS 6.5
@@ -21,7 +21,7 @@ CentOS 6.5
 ```
 
 ### 安装JDK
-yum安装Java
+yum安装
 ```
 # yum list java*
 # yum install -y java-1.7.0-openjdk*
@@ -34,17 +34,14 @@ yum安装Java
 # mkdir wcy
 # cd wcy
 ```
-
 下载tomcat
 ```
 # wget http://mirror.bit.edu.cn/apache/tomcat/tomcat-7/v7.0.81/bin/apache-tomcat-7.0.81.tar.gz
 ```
-
 解压
 ```
 # tar -zxf apache-tomcat-7.0.81.tar.gz
 ```
-
 启动tomcat
 ```
 # cd apache-tomcat-7.0.81/bin/
@@ -56,22 +53,19 @@ yum安装Java
 将导出的war包上传至tomcat的webapps目录下，tomcat将自动部署
 
 ### 安装MySQL
-1. yum安装mysql
+yum安装
 ```
 # yum install -y mysql-server
 ```
-
-2. 设置开机启动
+设置开机启动
 ```
 # chkconfig mysqld on
 ```
-
-3. 启动MySql服务
+启动MySql服务
 ```
 # service mysqld start
 ```
-
-4. 设置root用户密码
+设置root用户密码
 ```
 // 登录root
 # mysql -u root
@@ -81,13 +75,11 @@ mysql> select user,host,password from mysql.user;
 mysql> set password for root@localhost=password('password');
 mysql> exit
 ```
-
-5. 用新密码登陆
+用新密码登陆
 ```
 # mysql -u root -p
 ```
-
-6. 开放远程登录权限
+开放远程登录权限
 ```
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
