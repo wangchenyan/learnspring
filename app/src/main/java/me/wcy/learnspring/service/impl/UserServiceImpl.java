@@ -37,9 +37,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User query(String user_name) throws ServiceRuntimeException {
+    public User query(String username) throws ServiceRuntimeException {
         try {
-            return userDAO.query(user_name);
+            return userDAO.query(username);
         } catch (DataAccessException e) {
             e.printStackTrace();
             throw new ServiceRuntimeException("query error", e);

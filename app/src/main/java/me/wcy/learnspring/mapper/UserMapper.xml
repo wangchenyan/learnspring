@@ -4,17 +4,17 @@
     <resultMap id="userResultMap" type="me.wcy.learnspring.po.User"/>
 
     <sql id="userField">
-        id, user_name, password, phone_number, nickname, signature
+        id, username, db_create_time, db_update_time, password, phone_number, nickname, signature
     </sql>
 
     <sql id="userFieldWithoutId">
-        user_name, password, phone_number, nickname, signature
+        username, db_create_time, db_update_time, password, phone_number, nickname, signature
     </sql>
 
     <insert id="insert" parameterType="me.wcy.learnspring.po.User">
         insert into user (<include refid="userFieldWithoutId"/>)
         values (
-        #{user_name}, #{password}, #{phone_number}, #{nickname}, #{signature}
+        #{username}, #{db_create_time}, #{db_update_time}, #{password}, #{phone_number}, #{nickname}, #{signature}
         )
     </insert>
 
@@ -22,17 +22,18 @@
         select
         <include refid="userField"/>
         from user
-        where user_name=#{user_name}
+        where username=#{username}
     </select>
 
     <update id="update" parameterType="me.wcy.learnspring.po.User">
         update user
         <set>
+            <if test="db_update_time!=null">`db_update_time`=#{db_update_time},</if>
             <if test="password!=null">password=#{password},</if>
             <if test="phone_number!=null">phone_number=#{phone_number},</if>
             <if test="nickname!=null">nickname=#{nickname},</if>
             <if test="signature!=null">signature=#{signature},</if>
         </set>
-        where user_name=#{user_name}
+        where username=#{username}
     </update>
 </mapper>
