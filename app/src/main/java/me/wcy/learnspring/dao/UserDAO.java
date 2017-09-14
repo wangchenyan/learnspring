@@ -11,12 +11,12 @@ import org.springframework.dao.DataAccessException;
 public interface UserDAO {
     String CACHE_PREFIX = "c.user";
 
-    @CacheEvict(value = CACHE_PREFIX, key = "#user.username")
+    @CacheEvict(value = CACHE_PREFIX, key = "#p0.username")
     int insert(User user) throws DataAccessException;
 
-    @CacheEvict(value = CACHE_PREFIX, key = "#user.username")
+    @CacheEvict(value = CACHE_PREFIX, key = "#p0.username")
     int update(User user) throws DataAccessException;
 
-    @Cacheable(value = CACHE_PREFIX, key = "#username")
+    @Cacheable(value = CACHE_PREFIX, key = "#p0")
     User query(String username) throws DataAccessException;
 }

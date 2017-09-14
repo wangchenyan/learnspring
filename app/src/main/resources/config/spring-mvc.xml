@@ -3,27 +3,16 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:cache="http://www.springframework.org/schema/cache"
-       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc.xsd
-       http://www.springframework.org/schema/cache
-       http://www.springframework.org/schema/cache/spring-cache.xsd">
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <context:component-scan base-package="me.wcy.learnspring.controller"/>
     <context:component-scan base-package="me.wcy.learnspring.service"/>
 
     <!--开启注解-->
     <mvc:annotation-driven/>
-
-    <!--配置EhCache-->
-    <cache:annotation-driven/>
-    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
-          p:cache-manager-ref="cacheManagerFactory"/>
-    <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
-          p:config-location="classpath:config/ehcache.xml"/>
 </beans>

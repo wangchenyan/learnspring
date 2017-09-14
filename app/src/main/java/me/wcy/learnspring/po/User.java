@@ -1,11 +1,12 @@
 package me.wcy.learnspring.po;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  * Created by hzwangchenyan on 2017/9/7.
  */
-public class User {
+public class User implements Serializable {
     private Integer id;
     private String username;
     private Timestamp db_create_time;

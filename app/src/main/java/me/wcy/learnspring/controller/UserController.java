@@ -64,7 +64,7 @@ public class UserController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     @ResponseBody
-    public Response getTitle(
+    public Response login(
             @RequestParam("u") String username,
             @RequestParam("p") String password) {
         try {
