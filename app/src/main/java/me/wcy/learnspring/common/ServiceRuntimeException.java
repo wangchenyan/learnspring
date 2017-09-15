@@ -4,16 +4,19 @@ package me.wcy.learnspring.common;
  * Created by hzwangchenyan on 2017/9/7.
  */
 public class ServiceRuntimeException extends RuntimeException {
+    private int code = ResponseCode.GLOBAL_SERVER_ERROR;
 
-    public ServiceRuntimeException(String message) {
+    public ServiceRuntimeException(int code, String message) {
         super(message);
+        this.code = code;
     }
 
-    public ServiceRuntimeException(String message, Throwable cause) {
+    public ServiceRuntimeException(int code, String message, Throwable cause) {
         super(message, cause);
+        this.code = code;
     }
 
-    public ServiceRuntimeException(Throwable cause) {
-        super(cause);
+    public int getCode() {
+        return code;
     }
 }

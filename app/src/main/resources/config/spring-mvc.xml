@@ -14,5 +14,16 @@
     <context:component-scan base-package="me.wcy.learnspring.service"/>
 
     <!--开启注解-->
-    <mvc:annotation-driven/>
+    <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <bean class="me.wcy.learnspring.resolver.UserArgumentResolver"/>
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/api/**"/>
+            <bean class="me.wcy.learnspring.interceptor.TokenInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

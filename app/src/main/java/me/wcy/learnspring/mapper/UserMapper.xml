@@ -18,7 +18,14 @@
         )
     </insert>
 
-    <select id="query" parameterType="java.lang.String" resultMap="userResultMap">
+    <select id="queryById" parameterType="java.lang.Long" resultMap="userResultMap">
+        select
+        <include refid="userField"/>
+        from user
+        where id=#{id}
+    </select>
+
+    <select id="queryByUsername" parameterType="java.lang.String" resultMap="userResultMap">
         select
         <include refid="userField"/>
         from user

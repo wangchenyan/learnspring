@@ -1,20 +1,29 @@
-package me.wcy.learnspring.po;
+package me.wcy.learnspring.vo;
 
-import java.io.Serializable;
-import java.sql.Timestamp;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import me.wcy.learnspring.po.User;
 
 /**
- * Created by hzwangchenyan on 2017/9/7.
+ * Created by hzwangchenyan on 2017/9/15.
  */
-public class User implements Serializable {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class UserVO {
     private Long id;
     private String username;
-    private Timestamp db_create_time;
-    private Timestamp db_update_time;
-    private String password;
     private String phone_number;
     private String nickname;
     private String signature;
+    private String token;
+
+    public static UserVO newUserVO(User user) {
+        UserVO userVO = new UserVO();
+        userVO.setId(user.getId());
+        userVO.setUsername(user.getUsername());
+        userVO.setPhone_number(user.getPhone_number());
+        userVO.setNickname(user.getNickname());
+        userVO.setSignature(user.getSignature());
+        return userVO;
+    }
 
     public Long getId() {
         return id;
@@ -30,30 +39,6 @@ public class User implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public Timestamp getDb_create_time() {
-        return db_create_time;
-    }
-
-    public void setDb_create_time(Timestamp db_create_time) {
-        this.db_create_time = db_create_time;
-    }
-
-    public Timestamp getDb_update_time() {
-        return db_update_time;
-    }
-
-    public void setDb_update_time(Timestamp db_update_time) {
-        this.db_update_time = db_update_time;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhone_number() {
@@ -78,5 +63,13 @@ public class User implements Serializable {
 
     public void setSignature(String signature) {
         this.signature = signature;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
