@@ -34,7 +34,7 @@ yum安装
 # mkdir wcy
 # cd wcy
 ```
-下载tomcat
+下载
 ```
 # wget http://mirror.bit.edu.cn/apache/tomcat/tomcat-7/v7.0.81/bin/apache-tomcat-7.0.81.tar.gz
 ```
@@ -116,4 +116,57 @@ character-set-server=utf8
 重新连接MySQL
 ```
 # mysql -u root -p
+```
+
+### 安装Redis
+下载
+```
+# wget http://download.redis.io/releases/redis-4.0.1.tar.gz
+```
+解压
+```
+# tar -zxf redis-4.0.1.tar.gz
+```
+编译及安装
+```
+# cd redis-4.0.1
+# make && make install
+```
+复制配置文件
+```
+# cp redis.conf /etc/
+```
+修改配置文件
+```
+# vi /etc/redis.conf
+
+找到`daemonize`改为`yes`设置后台运行
+找到`requirepass`设置密码
+```
+设置开机自启
+```
+复制启动文件
+# cp utils/redis_init_script /etc/init.d/redis
+
+修改配置
+# vi /etc/init.d/redis
+在#!/bin/sh下添加
+# add by wangchenyan
+# chkconfig: 2345 90 10
+# description: Redis is a persistent key-value database
+
+修改PIDFILE和CONF
+PIDFILE=/var/run/redis.pid
+CONF="/etc/redis.conf"
+
+保存退出
+
+启动服务
+# service redis start
+
+设置开机自启
+# chkconfig redis on
+
+测试
+# redis-cli
 ```
