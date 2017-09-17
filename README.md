@@ -154,9 +154,7 @@ character-set-server=utf8
 # add by wangchenyan
 # chkconfig: 2345 90 10
 # description: Redis is a persistent key-value database
-
-修改PIDFILE和CONF
-PIDFILE=/var/run/redis.pid
+修改CONF文件位置
 CONF="/etc/redis.conf"
 
 保存退出
