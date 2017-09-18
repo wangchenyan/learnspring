@@ -47,6 +47,12 @@ yum安装
 # cd apache-tomcat-7.0.81/bin/
 # ./startup.sh
 ```
+设置开机自启
+```
+# vi /etc/rc.d/rc.local
+添加
+/home/wcy/apache-tomcat-7.0.81/bin/startup.sh
+```
 
 部署应用
 
@@ -57,7 +63,7 @@ yum安装
 ```
 # yum install -y mysql-server
 ```
-设置开机启动
+设置开机自启
 ```
 # chkconfig mysqld on
 ```
