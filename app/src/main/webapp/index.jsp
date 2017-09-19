@@ -9,8 +9,6 @@
 <html>
 <head>
     <title>LearnSpring</title>
-    <link rel="shortcut icon" href="image/icon.ico"/>
-    <link rel="bookmark" href="image/icon.ico"/>
 </head>
 <body>
 <b>Hello, This is a project used to learn Spring, view the source code on <a
