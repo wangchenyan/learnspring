@@ -35,7 +35,16 @@
         </plugins>
 
         <resources>
-            <!--防止Mapper打包时被过滤-->
+            <!--不过滤resources-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <!--不过滤Mapper-->
             <resource>
                 <directory>src/main/java</directory>
                 <includes>

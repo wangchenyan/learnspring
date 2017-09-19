@@ -7,10 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+    <title>LearnSpring</title>
+    <link rel="shortcut icon" href="image/icon.ico"/>
+    <link rel="bookmark" href="image/icon.ico"/>
+</head>
+<body>
+<b>Hello, This is a project used to learn Spring, view the source code on <a
+        href="https://github.com/wangchenyan/learnspring">Github</a>.</b>
+</body>
 </html>

@@ -43,7 +43,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         if (!tokenService.checkToken(userId, token)) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             PrintWriter pw = response.getWriter();
-            pw.append("Auth Failed !");
+            pw.append("Auth failed, Please login first!");
             pw.flush();
             pw.close();
             return false;
