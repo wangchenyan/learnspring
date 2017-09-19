@@ -15,12 +15,24 @@
 
     <!--开启注解-->
     <mvc:annotation-driven>
+        <!--参数解析器-->
         <mvc:argument-resolvers>
             <bean class="me.wcy.learnspring.resolver.UserArgumentResolver"/>
         </mvc:argument-resolvers>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <!--避免IE执行AJAX时，弹出下载文件-->
+                <property name="supportedMediaTypes" value="text/html;charset=UTF-8"/>
+            </bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <!--避免IE执行AJAX时，弹出下载文件-->
+                <property name="supportedMediaTypes" value="text/html;charset=UTF-8"/>
+            </bean>
+        </mvc:message-converters>
     </mvc:annotation-driven>
 
     <mvc:interceptors>
+        <!--请求拦截器-->
         <mvc:interceptor>
             <mvc:mapping path="/api/**"/>
             <bean class="me.wcy.learnspring.interceptor.TokenInterceptor"/>
