@@ -1,10 +1,9 @@
 package me.wcy.learnspring.controller;
 
 import me.wcy.learnspring.common.Response;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -15,11 +14,10 @@ import java.net.URL;
 /**
  * Created by hzwangchenyan on 2017/9/11.
  */
-@Controller
+@RestController
 public class XiaocaoController {
 
     @RequestMapping(value = "/getUrl", method = RequestMethod.GET)
-    @ResponseBody
     public Response getUrl() throws IOException {
         String url = "http://get.xunfs.com/app/listapp.php";
         URL httpUrl = new URL(url);

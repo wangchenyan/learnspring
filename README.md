@@ -24,7 +24,7 @@ CentOS 6.5
 yum安装
 ```
 # yum list java*
-# yum install -y java-1.7.0-openjdk*
+# yum install -y java-1.8.0-openjdk*
 ```
 
 ### 安装tomcat

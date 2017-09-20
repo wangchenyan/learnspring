@@ -27,10 +27,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void register(String username, String password, String phoneNumber, String nickname, String signature) throws ServiceRuntimeException {
-        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-            throw new ServiceRuntimeException(ResponseCode.GLOBAL_PARAM_ERROR, "param error");
-        }
-
         User origin = userDAO.queryByUsername(username);
         if (origin != null) {
             throw new ServiceRuntimeException(ResponseCode.GLOBAL_ILLEGAL_REQUEST, "user exist");

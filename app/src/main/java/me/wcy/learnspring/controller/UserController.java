@@ -8,24 +8,23 @@ import me.wcy.learnspring.po.User;
 import me.wcy.learnspring.resolver.annotation.ResolveUser;
 import me.wcy.learnspring.service.UserService;
 import me.wcy.learnspring.vo.UserVO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by wcy on 2017/9/3.
  */
-@Controller
+@RestController
 @RequestMapping("/api/user")
 public class UserController {
     @Autowired
     private UserService userService;
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    @ResponseBody
     public Response register(
             @RequestParam("u") String username,
             @RequestParam("p") String password,
@@ -33,6 +32,10 @@ public class UserController {
             @RequestParam(value = "nick", required = false) String nickname,
             @RequestParam(value = "sign", required = false) String signature
     ) {
+        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+            return new Response(ResponseCode.GLOBAL_PARAM_ERROR, "param error");
+        }
+
         try {
             userService.register(username, password, phoneNumber, nickname, signature);
             return new Response(ResponseCode.GLOBAL_SUCCESS, "success");
@@ -43,7 +46,6 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    @ResponseBody
     public Response login(
             @RequestParam("u") String username,
             @RequestParam("p") String password) {
@@ -57,7 +59,6 @@ public class UserController {
     }
 
     @RequestMapping(value = "/getUserInfo", method = RequestMethod.GET)
-    @ResponseBody
     @TokenCheck
     public Response getUserInfo(
             @ResolveUser User user
