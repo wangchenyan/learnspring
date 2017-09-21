@@ -5,14 +5,13 @@ Spring学习记录
 CentOS 6.5
 
 ### 登录云主机
-打开Xshell，并点击新建，根据要求输入相应参数
+打开Xshell，点击新建，根据要求输入相应参数
 ```
 名称：自定义设置
 协议：SSH
 主机：主机公网IP
 端口号：22
 ```
-
 选择用户身份认证
 ```
 方法选择：Password
@@ -34,12 +33,9 @@ yum安装
 # mkdir wcy
 # cd wcy
 ```
-下载
+下载并解压
 ```
 # wget http://mirror.bit.edu.cn/apache/tomcat/tomcat-7/v7.0.81/bin/apache-tomcat-7.0.81.tar.gz
-```
-解压
-```
 # tar -zxf apache-tomcat-7.0.81.tar.gz
 ```
 启动tomcat
@@ -125,12 +121,10 @@ character-set-server=utf8
 ```
 
 ### 安装Redis
-下载
+下载并解压
 ```
+# cd /home/wcy/
 # wget http://download.redis.io/releases/redis-4.0.1.tar.gz
-```
-解压
-```
 # tar -zxf redis-4.0.1.tar.gz
 ```
 编译及安装
@@ -173,4 +167,54 @@ CONF="/etc/redis.conf"
 
 测试
 # redis-cli
+```
+
+### 安装Maven
+下载并解压
+```
+# cd /home/wcy/
+# wget http://mirror.bit.edu.cn/apache/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
+# tar -zxf apache-maven-3.5.0-bin.tar.gz
+```
+添加环境变量
+```
+# vi /etc/profile
+添加
+export MAVEN_HOME=/home/wcy/apache-maven-3.5.0
+export PATH=$PATH:$MAVEN_HOME/bin
+```
+刷新环境变量
+```
+# source /etc/profile
+```
+查看是否添加成功
+```
+# mvn -version
+```
+
+### 安装Git
+yum安装
+```
+# yum install -y git
+```
+
+### 添加一键部署脚本
+clone项目
+```
+# cd /home/wcy/
+# mkdir projects
+# cd projects
+# git clone https://github.com/wangchenyan/learnspring.git
+```
+复制打包脚本
+```
+# cp /home/wcy/projects/learnspring/deploy /usr/local/bin/deploy
+```
+添加可执行权限
+```
+# chmod +x /usr/local/bin/deploy
+```
+一键部署
+```
+# deploy
 ```

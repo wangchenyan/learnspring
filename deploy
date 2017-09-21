@@ -1,20 +1,26 @@
 #!/bin/bash
 #
-#自动部署脚本
+#一键部署脚本
 
 WAR_PATH="/home/wcy/projects/learnspring/app/target/app-1.0-SNAPSHOT.war"
 DEPLOY_PATH="/home/wcy/apache-tomcat-7.0.81/webapps/app.war"
 
 cd /home/wcy/projects/learnspring/
 
-printf "正在更新代码..."
+printf "> 正在更新代码...\n"
 git pull
 
-printf "正在打包..."
-mvn clean package
+printf "> 正在清理...\n"
+mvn clean
 
-if [ ! -d "WAR_PATH" ]; then
-    printf "打包失败..."
+printf "> 正在打包...\n"
+mvn package
+
+if [ -f $WAR_PATH ];
+then
+    printf "> 打包成功...\n"
+    cp -rf $WAR_PATH $DEPLOY_PATH
+    printf "> 拷贝成功...\n"
 else
-    cp -rf "WAR_PATH" "DEPLOY_PATH"
+    printf "> 打包失败...\n"
 fi
