@@ -208,7 +208,7 @@ clone项目
 ```
 复制打包脚本
 ```
-# cp /home/wcy/projects/learnspring/deploy /usr/local/bin/deploy
+# cp /home/wcy/projects/learnspring/deploy /usr/local/bin/
 ```
 添加可执行权限
 ```
