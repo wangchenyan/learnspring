@@ -1,6 +1,6 @@
 package me.wcy.learnspring.dao;
 
-import me.wcy.learnspring.po.User;
+import me.wcy.learnspring.entity.User;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;

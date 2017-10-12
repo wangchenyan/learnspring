@@ -7,7 +7,7 @@ public interface TokenService {
 
     String createToken(Long userId);
 
-    boolean checkToken(Long userId,String token);
+    boolean checkToken(Long userId, String token);
 
     void deleteToken(Long userId);
 }

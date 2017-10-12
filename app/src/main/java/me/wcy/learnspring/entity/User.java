@@ -1,4 +1,4 @@
-package me.wcy.learnspring.po;
+package me.wcy.learnspring.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

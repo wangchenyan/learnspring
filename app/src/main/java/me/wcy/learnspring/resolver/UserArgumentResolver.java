@@ -1,7 +1,7 @@
 package me.wcy.learnspring.resolver;
 
 import me.wcy.learnspring.dao.UserDAO;
-import me.wcy.learnspring.po.User;
+import me.wcy.learnspring.entity.User;
 import me.wcy.learnspring.resolver.annotation.ResolveUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;

@@ -3,7 +3,7 @@ package me.wcy.learnspring.service.impl;
 import me.wcy.learnspring.common.ResponseCode;
 import me.wcy.learnspring.common.ServiceRuntimeException;
 import me.wcy.learnspring.dao.UserDAO;
-import me.wcy.learnspring.po.User;
+import me.wcy.learnspring.entity.User;
 import me.wcy.learnspring.service.TokenService;
 import me.wcy.learnspring.service.UserService;
 import me.wcy.learnspring.vo.UserVO;

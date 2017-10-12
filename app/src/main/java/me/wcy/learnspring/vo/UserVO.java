@@ -1,7 +1,7 @@
 package me.wcy.learnspring.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import me.wcy.learnspring.po.User;
+import me.wcy.learnspring.entity.User;
 
 /**
  * Created by hzwangchenyan on 2017/9/15.
