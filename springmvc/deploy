@@ -2,8 +2,8 @@
 #
 #一键部署脚本
 
-WAR_PATH="/home/wcy/projects/learnspring/app/target/app.war"
-DEPLOY_PATH="/home/wcy/apache-tomcat-7.0.81/webapps/app.war"
+WAR_PATH="/home/wcy/projects/learnspring/app/target/springmvc-1.0-SNAPSHOT.war"
+DEPLOY_PATH="/home/wcy/apache-tomcat-7.0.81/webapps/springmvc.war"
 
 cd /home/wcy/projects/learnspring/
 
