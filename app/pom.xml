@@ -12,6 +12,8 @@
     <artifactId>app</artifactId>
     <packaging>war</packaging>
     <build>
+        <finalName>app</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
