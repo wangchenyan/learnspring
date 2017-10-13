@@ -12,10 +12,10 @@ public interface UserDAO {
     String CACHE_PREFIX = "c.user";
 
     @CacheEvict(value = CACHE_PREFIX, key = "#p0.id")
-    int insert(User user) throws DataAccessException;
+    long insert(User user) throws DataAccessException;
 
     @CacheEvict(value = CACHE_PREFIX, key = "#p0.id")
-    int update(User user) throws DataAccessException;
+    long update(User user) throws DataAccessException;
 
     @Cacheable(value = CACHE_PREFIX, key = "#p0")
     User queryById(Long id) throws DataAccessException;

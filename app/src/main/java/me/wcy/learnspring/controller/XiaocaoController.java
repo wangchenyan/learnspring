@@ -1,15 +1,13 @@
 package me.wcy.learnspring.controller;
 
+import me.wcy.learnspring.common.HttpClient;
 import me.wcy.learnspring.common.Response;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by hzwangchenyan on 2017/9/11.
@@ -18,36 +16,18 @@ import java.net.URL;
 public class XiaocaoController {
 
     @RequestMapping(value = "/getUrl", method = RequestMethod.GET)
-    public Response getUrl() throws IOException {
+    public Response getUrl() {
         String url = "http://get.xunfs.com/app/listapp.php";
-        URL httpUrl = new URL(url);
-        HttpURLConnection urlConnection = (HttpURLConnection) httpUrl.openConnection();
-        urlConnection.setRequestMethod("POST");
-        urlConnection.setRequestProperty("User-Agent", "Common");
-        urlConnection.setReadTimeout(30 * 1000);
-        urlConnection.setConnectTimeout(30 * 1000);
-        urlConnection.setUseCaches(false);
-        urlConnection.setDoOutput(true);
-        urlConnection.setDoInput(true);
+        Map<String, String> data = new HashMap<>();
+        data.put("a", "get");
+        data.put("system", "android");
+        data.put("v", "1.4");
 
-        String params = "a=get&system=android&v=1.4";
-        DataOutputStream out = new DataOutputStream(urlConnection.getOutputStream());
-        out.write(params.getBytes());
-        out.close();
-
-        int resCode = urlConnection.getResponseCode();
-        if (resCode == HttpURLConnection.HTTP_OK) {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            int len;
-            byte buffer[] = new byte[1024];
-            while ((len = urlConnection.getInputStream().read(buffer)) != -1) {
-                bos.write(buffer, 0, len);
-            }
-            String result = new String(bos.toByteArray(), "UTF-8");
-            bos.close();
+        try {
+            String result = HttpClient.postFormData(url, data);
             return new Response(result);
+        } catch (Exception e) {
+            return new Response(500, "fail");
         }
-
-        return new Response(500, "fail");
     }
 }

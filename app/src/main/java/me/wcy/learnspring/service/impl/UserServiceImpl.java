@@ -1,5 +1,6 @@
 package me.wcy.learnspring.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import me.wcy.learnspring.common.ResponseCode;
 import me.wcy.learnspring.common.ServiceRuntimeException;
 import me.wcy.learnspring.dao.UserDAO;
@@ -8,6 +9,8 @@ import me.wcy.learnspring.service.TokenService;
 import me.wcy.learnspring.service.UserService;
 import me.wcy.learnspring.vo.UserVO;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -20,13 +23,15 @@ import java.sql.Timestamp;
  */
 @Service
 public class UserServiceImpl implements UserService {
+    private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
+
     @Autowired
     private UserDAO userDAO;
     @Autowired
     private TokenService tokenService;
 
     @Override
-    public void register(String username, String password, String phoneNumber, String nickname, String signature) throws ServiceRuntimeException {
+    public long register(String username, String password, String phoneNumber, String nickname, String signature) throws ServiceRuntimeException {
         User origin = userDAO.queryByUsername(username);
         if (origin != null) {
             throw new ServiceRuntimeException(ResponseCode.GLOBAL_ILLEGAL_REQUEST, "user exist");
@@ -42,9 +47,9 @@ public class UserServiceImpl implements UserService {
         user.setDb_create_time(new Timestamp(System.currentTimeMillis()));
         user.setDb_update_time(new Timestamp(System.currentTimeMillis()));
         try {
-            userDAO.insert(user);
+            return userDAO.insert(user);
         } catch (DataAccessException e) {
-            e.printStackTrace();
+            LOGGER.error("insert user error. " + JSON.toJSONString(user));
             throw new ServiceRuntimeException(ResponseCode.GLOBAL_SERVER_ERROR, "register error", e);
         }
     }
@@ -65,7 +70,7 @@ public class UserServiceImpl implements UserService {
             userVO.setToken(token);
             return userVO;
         } catch (DataAccessException e) {
-            e.printStackTrace();
+            LOGGER.error("query user error. u=" + username + ", p=" + password, e);
             throw new ServiceRuntimeException(ResponseCode.GLOBAL_SERVER_ERROR, "login error", e);
         }
     }

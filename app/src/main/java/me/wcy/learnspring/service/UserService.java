@@ -8,7 +8,7 @@ import me.wcy.learnspring.vo.UserVO;
  */
 public interface UserService {
 
-    void register(String username, String password, String phoneNumber, String nickname, String signature) throws ServiceRuntimeException;
+    long register(String username, String password, String phoneNumber, String nickname, String signature) throws ServiceRuntimeException;
 
     UserVO login(String username, String password) throws ServiceRuntimeException;
 }
