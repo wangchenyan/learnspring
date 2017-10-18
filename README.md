@@ -83,8 +83,8 @@ mysql> exit
 ```
 开放远程登录权限
 ```
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;
+mysql> FLUSH PRIVILEGES;
 ```
 
 **设置MySQL编码**
@@ -123,7 +123,7 @@ character-set-server=utf8
 ### 安装Redis
 下载并解压
 ```
-# cd /home/wcy/
+# cd /home/wcy/software/
 # wget http://download.redis.io/releases/redis-4.0.1.tar.gz
 # tar -zxf redis-4.0.1.tar.gz
 ```
@@ -172,7 +172,7 @@ CONF="/etc/redis.conf"
 ### 安装Maven
 下载并解压
 ```
-# cd /home/wcy/
+# cd /home/wcy/software/
 # wget http://mirror.bit.edu.cn/apache/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.tar.gz
 # tar -zxf apache-maven-3.5.0-bin.tar.gz
 ```
@@ -180,7 +180,7 @@ CONF="/etc/redis.conf"
 ```
 # vi /etc/profile
 添加
-export MAVEN_HOME=/home/wcy/apache-maven-3.5.0
+export MAVEN_HOME=/home/wcy/software/apache-maven-3.5.0
 export PATH=$PATH:$MAVEN_HOME/bin
 ```
 刷新环境变量
@@ -201,14 +201,12 @@ yum安装
 ### 添加一键部署脚本
 clone项目
 ```
-# cd /home/wcy/
-# mkdir projects
-# cd projects
+# cd /home/wcy/project/
 # git clone https://github.com/wangchenyan/learnspring.git
 ```
 复制打包脚本
 ```
-# cp /home/wcy/projects/learnspring/deploy /usr/local/bin/
+# cp /home/wcy/project/learnspring/deploy /usr/local/bin/
 ```
 添加可执行权限
 ```
