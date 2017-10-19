@@ -23,6 +23,7 @@ public class ASRController {
             @RequestParam("result") List<String> result,
             HttpServletRequest request
     ) {
+        System.out.println(JSON.toJSONString(request.getParameterMap()));
         return new Response(JSON.toJSONString(request.getParameterMap()));
     }
 }
