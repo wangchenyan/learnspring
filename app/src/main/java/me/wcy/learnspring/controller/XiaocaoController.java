@@ -18,13 +18,13 @@ public class XiaocaoController {
     @RequestMapping(value = "/getUrl", method = RequestMethod.GET)
     public Response getUrl() {
         String url = "http://get.xunfs.com/app/listapp.php";
-        Map<String, String> data = new HashMap<>();
-        data.put("a", "get");
-        data.put("system", "android");
-        data.put("v", "1.4");
+        Map<String, String> form = new HashMap<>();
+        form.put("a", "get");
+        form.put("system", "android");
+        form.put("v", "1.4");
 
         try {
-            String result = HttpClient.postFormData(url, data);
+            String result = HttpClient.postFormData(url, null, form);
             return new Response(result);
         } catch (Exception e) {
             return new Response(500, "fail");
