@@ -1,11 +1,9 @@
 package me.wcy.learnspring.controller;
 
-import com.alibaba.fastjson.JSON;
 import me.wcy.learnspring.common.Response;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by hzwangchenyan on 2017/10/19.
@@ -15,13 +13,9 @@ public class ASRController {
 
     @RequestMapping("/api/asr")
     public Response callback(
-//            @RequestParam("ret_code") Integer ret_code,
-//            @RequestParam("ret_msg") String ret_msg,
-//            @RequestParam("sn") String sn,
-//            @RequestParam("result") List<String> result,
-            HttpServletRequest request
+            @RequestBody String result
     ) {
-        System.out.println(JSON.toJSONString(request.getParameterMap()));
-        return new Response(JSON.toJSONString(request.getParameterMap()));
+        System.out.println(result);
+        return new Response(result);
     }
 }
