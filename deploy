@@ -2,10 +2,10 @@
 #
 #一键部署脚本
 
-WAR_PATH="/home/wcy/projects/learnspring/app/target/app.war"
-DEPLOY_PATH="/home/wcy/apache-tomcat-7.0.81/webapps/app.war"
+WAR_PATH="/home/wcy/project/learnspring/app/target/app.jar"
+DEPLOY_PATH="/home/wcy/app/app.jar"
 
-cd /home/wcy/projects/learnspring/
+cd /home/wcy/project/learnspring/
 
 printf "> 正在更新代码...\n"
 git pull
@@ -21,6 +21,7 @@ then
     printf "> 打包成功...\n"
     cp -rf $WAR_PATH $DEPLOY_PATH
     printf "> 拷贝成功...\n"
+    nohup java -jar $DEPLOY_PATH
 else
     printf "> 打包失败...\n"
 fi
