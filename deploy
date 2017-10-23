@@ -3,7 +3,7 @@
 #一键部署脚本
 
 APP_NAME=app
-WAR_PATH=/home/wcy/project/learnspring/app/target/app.jar
+JAR_PATH=/home/wcy/project/learnspring/app/target/app.jar
 DEPLOY_PATH=/home/wcy/app/app.jar
 OUTPUT_PATH=/home/wcy/app/app.out
 
@@ -38,10 +38,10 @@ mvn clean
 echo '> Package...'
 mvn package
 
-if [ -f $WAR_PATH ];
+if [ -f $JAR_PATH ];
 then
     echo '> Package Success!'
-    cp -rf $WAR_PATH $DEPLOY_PATH
+    cp -rf $JAR_PATH $DEPLOY_PATH
     echo '> Copy Success!'
 
 
