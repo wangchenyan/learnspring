@@ -258,7 +258,7 @@ public class ASRController {
     private static int total = 0;
     private static int success = 0;
 
-    public static void asr() throws IOException {
+    public static void asr() {
         String[] sources = source.split("\n");
         for (String url : sources) {
             if (!url.startsWith("http")) {
