@@ -47,7 +47,7 @@ then
 
     #Start
     nohup java -jar $DEPLOY_PATH > $OUTPUT_PATH 2>&1 &
-    echo 'Start Success!'
+    echo '> Start Success!'
 else
     echo '> Package Failed!'
 fi
