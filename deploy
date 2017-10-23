@@ -2,26 +2,52 @@
 #
 #一键部署脚本
 
-WAR_PATH="/home/wcy/project/learnspring/app/target/app.jar"
-DEPLOY_PATH="/home/wcy/app/app.jar"
+APP_NAME=app
+WAR_PATH=/home/wcy/project/learnspring/app/target/app.jar
+DEPLOY_PATH=/home/wcy/app/app.jar
+OUTPUT_PATH=/home/wcy/app/app.out
 
+
+#Stop
+tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
+if [ ${tpid} ];
+then
+    echo '> Stop Process...'
+    kill -15 $tpid
+fi
+sleep 5
+tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
+if [ ${tpid} ];
+then
+    echo '> Kill Process!'
+    kill -9 $tpid
+else
+    echo '> Stop Success!'
+fi
+
+
+#Package
 cd /home/wcy/project/learnspring/
 
-printf "> 正在更新代码...\n"
+echo '> Update Code...'
 git pull
 
-printf "> 正在清理...\n"
+echo '> Clean...'
 mvn clean
 
-printf "> 正在打包...\n"
+echo '> Package...'
 mvn package
 
 if [ -f $WAR_PATH ];
 then
-    printf "> 打包成功...\n"
+    echo '> Package Success!'
     cp -rf $WAR_PATH $DEPLOY_PATH
-    printf "> 拷贝成功...\n"
-    nohup java -jar $DEPLOY_PATH
+    echo '> Copy Success!'
+
+
+    #Start
+    nohup java -jar $DEPLOY_PATH > $OUTPUT_PATH 2>&1 &
+    echo 'Start Success!'
 else
-    printf "> 打包失败...\n"
+    echo '> Package Failed!'
 fi
