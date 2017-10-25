@@ -7,6 +7,7 @@ import me.wcy.learnspring.common.COS;
 import me.wcy.learnspring.common.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,8 +20,20 @@ import java.io.IOException;
  * Created by hzwangchenyan on 2017/10/25.
  */
 @RestController
+@ConfigurationProperties(prefix = "keystore")
 public class KeystoreController {
     private static final Logger LOGGER = LogManager.getLogger(KeystoreController.class);
+
+    private String javaPath;
+    private String tempPath;
+
+    public String getJavaPath() {
+        return javaPath;
+    }
+
+    public String getTempPath() {
+        return tempPath;
+    }
 
     @RequestMapping(value = "/api/genkey", method = RequestMethod.POST)
     public Response genKeystore(
@@ -43,7 +56,7 @@ public class KeystoreController {
             return new Response(400, "param format error");
         }
 
-        String dir = "/home/keystore/";
+        String dir = javaPath;
         File dirFile = new File(dir);
         if (!dirFile.exists()) {
             dirFile.mkdirs();
@@ -78,11 +91,11 @@ public class KeystoreController {
         return new Response(500, "generate keystore failed");
     }
 
-    private static boolean genKeystore(String filePath, String alias, String storepass, String keypass, int validity,
-                                       String name, String organization, String city, String province, String countryCode) {
+    private boolean genKeystore(String filePath, String alias, String storepass, String keypass, int validity,
+                                String name, String organization, String city, String province, String countryCode) {
         try {
             StringBuilder cmd = new StringBuilder();
-            cmd.append("/usr/lib/jvm/java-1.8.0/bin/")
+            cmd.append(tempPath)
                     .append("keytool -genkey")
                     .append(" -alias ").append(alias)
                     .append(" -keyalg RSA")
