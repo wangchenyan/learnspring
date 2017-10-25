@@ -51,6 +51,7 @@ public class KeystoreController {
                     .append(",ST=").append(province)
                     .append(",C=").append(countryCode)
                     .append("\"");
+            LOGGER.info("genKeystore, cmd: " + cmd.toString());
             Runtime.getRuntime().exec(cmd.toString());
             return true;
         } catch (IOException e) {
