@@ -8,6 +8,8 @@ import me.wcy.learnspring.common.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
@@ -20,8 +22,27 @@ import java.io.IOException;
 public class KeystoreController {
     private static final Logger LOGGER = LogManager.getLogger(KeystoreController.class);
 
-    @RequestMapping("/api/genkey")
-    public Response genKeystore() {
+    @RequestMapping(value = "/api/genkey", method = RequestMethod.POST)
+    public Response genKeystore(
+            @RequestParam("alias") String alias,
+            @RequestParam("storepass") String storepass,
+            @RequestParam("keypass") String keypass,
+            @RequestParam("validity") Integer validity,
+            @RequestParam("name") String name,
+            @RequestParam("organization") String organization,
+            @RequestParam("city") String city,
+            @RequestParam("province") String province,
+            @RequestParam("countryCode") String countryCode
+    ) {
+        if (alias.contains(" ")
+                || storepass.contains(" ")
+                || keypass.contains(" ")
+                || storepass.length() < 6
+                || keypass.length() < 6
+                || validity <= 0) {
+            return new Response(400, "param format error");
+        }
+
         String dir = "/home/keystore/";
         File dirFile = new File(dir);
         if (!dirFile.exists()) {
@@ -35,7 +56,7 @@ public class KeystoreController {
         String path = dir + fileName;
         File file = new File(path);
 
-        boolean result = genKeystore(path, "wangchenyan", "123456", "123456", 100, "wcy", "nt", "hz", "zj", "cn");
+        boolean result = genKeystore(path, alias, storepass, keypass, validity, name, organization, city, province, countryCode);
         if (result && file.exists()) {
             UploadFileRequest uploadFileRequest = new UploadFileRequest(COS.BUCKET, "/" + file.getName(), file.getAbsolutePath());
             String uploadFileRet = COS.getCOSClient().uploadFile(uploadFileRequest);
