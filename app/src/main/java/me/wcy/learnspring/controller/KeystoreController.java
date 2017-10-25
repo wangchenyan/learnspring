@@ -1,8 +1,6 @@
 package me.wcy.learnspring.controller;
 
 import me.wcy.learnspring.common.Response;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +12,7 @@ import java.io.IOException;
  */
 @RestController
 public class KeystoreController {
-    private static final Logger LOGGER = LogManager.getLogger(KeystoreController.class);
+    //private static final Logger LOGGER = LogManager.getLogger(KeystoreController.class);
 
     @RequestMapping("/api/genkey")
     public Response genKeystore() {
@@ -59,13 +57,13 @@ public class KeystoreController {
                     .append(",ST=").append(province)
                     .append(",C=").append(countryCode)
                     .append("\"");
-            LOGGER.info("genKeystore, cmd: " + cmd.toString());
+            //LOGGER.info("genKeystore, cmd: " + cmd.toString());
             String[] cmds = new String[]{"/bin/sh", "-c", cmd.toString()};
             Process process = Runtime.getRuntime().exec(cmds);
             process.waitFor();
             return true;
         } catch (IOException | InterruptedException e) {
-            LOGGER.error("genKeystore error", e);
+            //LOGGER.error("genKeystore error", e);
         }
 
         return false;
