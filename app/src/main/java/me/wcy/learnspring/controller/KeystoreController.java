@@ -26,10 +26,10 @@ public class KeystoreController {
             dirFile.delete();
             dirFile.mkdirs();
         }
+        dirFile.setWritable(true, false);
         String fileName = "keystore_" + System.currentTimeMillis() + ".jks";
         String path = dir + fileName;
         File file = new File(path);
-        file.setWritable(true, false);
         boolean result = genKeystore(path, "wangchenyan", "123456", "123456", 100, "wcy", "nt", "hz", "zj", "cn");
         if (result && file.exists()) {
             return new Response("success");
