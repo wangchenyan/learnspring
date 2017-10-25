@@ -18,7 +18,7 @@ public class KeystoreController {
 
     @RequestMapping("/api/genkey")
     public Response genKeystore() {
-        String dir = "/home/keystore/";
+        String dir = "/home/wcy/app/keystore/";
         File dirFile = new File(dir);
         if (!dirFile.exists()) {
             dirFile.mkdirs();
