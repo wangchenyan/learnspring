@@ -1,6 +1,8 @@
 package me.wcy.learnspring.controller;
 
 import me.wcy.learnspring.common.Response;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +14,7 @@ import java.io.IOException;
  */
 @RestController
 public class KeystoreController {
+    private static final Logger LOGGER = LogManager.getLogger(KeystoreController.class);
 
     @RequestMapping("/api/genkey")
     public Response genKeystore() {
@@ -51,7 +54,7 @@ public class KeystoreController {
             Runtime.getRuntime().exec(cmd.toString());
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error("genKeystore error", e);
         }
 
         return false;
