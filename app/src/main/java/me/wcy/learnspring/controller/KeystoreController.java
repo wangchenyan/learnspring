@@ -42,7 +42,11 @@ public class KeystoreController {
             JSONObject resultObject = JSON.parseObject(uploadFileRet);
             int code = resultObject.getIntValue("code");
             String message = resultObject.getString("message");
-            String downloadUrl = resultObject.getString("access_url");
+            JSONObject data = resultObject.getJSONObject("data");
+            String downloadUrl = null;
+            if (data != null) {
+                downloadUrl = data.getString("access_url");
+            }
             if (code == 0) {
                 return new Response(downloadUrl);
             } else {
