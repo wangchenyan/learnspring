@@ -18,7 +18,7 @@ public class KeystoreController {
 
     @RequestMapping("/api/genkey")
     public Response genKeystore() {
-        String dir = "/home/keystore/";
+        String dir = "/home/";
         String fileName = "keystore_" + System.currentTimeMillis() + ".jks";
         String path = dir + fileName;
         File file = new File(path);
