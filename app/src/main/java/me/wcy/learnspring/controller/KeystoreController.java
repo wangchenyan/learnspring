@@ -29,17 +29,10 @@ public class KeystoreController {
         String fileName = "keystore_" + System.currentTimeMillis() + ".jks";
         String path = dir + fileName;
         File file = new File(path);
+        file.setWritable(true, false);
         boolean result = genKeystore(path, "wangchenyan", "123456", "123456", 100, "wcy", "nt", "hz", "zj", "cn");
-        if (result) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            if (file.exists()) {
-                return new Response("success");
-            }
+        if (result && file.exists()) {
+            return new Response("success");
         }
 
         return new Response(500, "error");
@@ -68,9 +61,9 @@ public class KeystoreController {
                     .append("\"");
             LOGGER.info("genKeystore, cmd: " + cmd.toString());
             Process process = Runtime.getRuntime().exec(cmd.toString());
-            process.waitFor();
+            //process.waitFor();
             return true;
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException /*| InterruptedException*/ e) {
             LOGGER.error("genKeystore error", e);
         }
 
