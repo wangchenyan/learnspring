@@ -26,6 +26,11 @@ public class KeystoreController {
         if (result && file.exists()) {
             return new Response("success");
         } else {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             return new Response(500, "error");
         }
     }
