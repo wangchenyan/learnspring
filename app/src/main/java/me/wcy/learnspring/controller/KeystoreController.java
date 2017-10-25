@@ -67,9 +67,10 @@ public class KeystoreController {
                     .append(",C=").append(countryCode)
                     .append("\"");
             LOGGER.info("genKeystore, cmd: " + cmd.toString());
-            Runtime.getRuntime().exec(cmd.toString());
+            Process process = Runtime.getRuntime().exec(cmd.toString());
+            process.waitFor();
             return true;
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             LOGGER.error("genKeystore error", e);
         }
 
