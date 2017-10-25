@@ -1,5 +1,7 @@
 package me.wcy.learnspring.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.qcloud.cos.request.UploadFileRequest;
 import me.wcy.learnspring.common.COS;
 import me.wcy.learnspring.common.Response;
@@ -28,17 +30,27 @@ public class KeystoreController {
             dirFile.delete();
             dirFile.mkdirs();
         }
+
         String fileName = "keystore_" + System.currentTimeMillis() + ".jks";
         String path = dir + fileName;
         File file = new File(path);
+
         boolean result = genKeystore(path, "wangchenyan", "123456", "123456", 100, "wcy", "nt", "hz", "zj", "cn");
         if (result && file.exists()) {
             UploadFileRequest uploadFileRequest = new UploadFileRequest(COS.BUCKET, "/" + file.getName(), file.getAbsolutePath());
             String uploadFileRet = COS.getCOSClient().uploadFile(uploadFileRequest);
-            return new Response(uploadFileRet);
+            JSONObject resultObject = JSON.parseObject(uploadFileRet);
+            int code = resultObject.getIntValue("code");
+            String message = resultObject.getString("message");
+            String downloadUrl = resultObject.getString("access_url");
+            if (code == 0) {
+                return new Response(downloadUrl);
+            } else {
+                return new Response(500, "upload file to COS failed, code: " + code + ", message: " + message);
+            }
         }
 
-        return new Response(500, "error");
+        return new Response(500, "generate keystore failed");
     }
 
     private static boolean genKeystore(String filePath, String alias, String storepass, String keypass, int validity,
