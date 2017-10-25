@@ -18,21 +18,31 @@ public class KeystoreController {
 
     @RequestMapping("/api/genkey")
     public Response genKeystore() {
-        String dir = "/home/";
+        String dir = "/home/keystore/";
+        File dirFile = new File(dir);
+        if (!dirFile.exists()) {
+            dirFile.mkdirs();
+        } else if (dirFile.isFile()) {
+            dirFile.delete();
+            dirFile.mkdirs();
+        }
         String fileName = "keystore_" + System.currentTimeMillis() + ".jks";
         String path = dir + fileName;
         File file = new File(path);
         boolean result = genKeystore(path, "wangchenyan", "123456", "123456", 100, "wcy", "nt", "hz", "zj", "cn");
-        if (result && file.exists()) {
-            return new Response("success");
-        } else {
+        if (result) {
             try {
-                file.createNewFile();
-            } catch (IOException e) {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            return new Response(500, "error");
+
+            if (file.exists()) {
+                return new Response("success");
+            }
         }
+
+        return new Response(500, "error");
     }
 
     private static boolean genKeystore(String filePath, String alias, String storepass, String keypass, int validity,
