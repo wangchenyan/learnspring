@@ -18,7 +18,7 @@ public class KeystoreController {
 
     @RequestMapping("/api/genkey")
     public Response genKeystore() {
-        String dir = "/home/wcy/app/keystore/";
+        String dir = "/home/keystore/";
         File dirFile = new File(dir);
         if (!dirFile.exists()) {
             dirFile.mkdirs();
@@ -26,7 +26,6 @@ public class KeystoreController {
             dirFile.delete();
             dirFile.mkdirs();
         }
-        dirFile.setWritable(true, false);
         String fileName = "keystore_" + System.currentTimeMillis() + ".jks";
         String path = dir + fileName;
         File file = new File(path);
