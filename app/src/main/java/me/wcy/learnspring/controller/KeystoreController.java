@@ -1,5 +1,7 @@
 package me.wcy.learnspring.controller;
 
+import com.qcloud.cos.request.UploadFileRequest;
+import me.wcy.learnspring.common.COS;
 import me.wcy.learnspring.common.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,7 +33,9 @@ public class KeystoreController {
         File file = new File(path);
         boolean result = genKeystore(path, "wangchenyan", "123456", "123456", 100, "wcy", "nt", "hz", "zj", "cn");
         if (result && file.exists()) {
-            return new Response("success");
+            UploadFileRequest uploadFileRequest = new UploadFileRequest(COS.BUCKET, "/" + file.getName(), file.getAbsolutePath());
+            String uploadFileRet = COS.getCOSClient().uploadFile(uploadFileRequest);
+            return new Response(uploadFileRet);
         }
 
         return new Response(500, "error");
@@ -68,15 +72,5 @@ public class KeystoreController {
         }
 
         return false;
-    }
-
-    public static void main(String[] args) throws IOException {
-        StringBuffer cmd = new StringBuffer();
-        cmd.append("D:\\Java\\jdk-9.0.1\\bin\\");
-        cmd.append("keytool -genkey -alias weblogicssl -keyalg RSA -keysize 1024 -validity 365 ");
-        cmd.append("-keystore D:/weblogic.jks ");
-        cmd.append("-keypass 123456789 -storepass 123456789 ");
-        cmd.append("-dname \"CN=localhost,OU=cn,O=c n,L=cn,ST=cn,C=cn\"");
-        Process ps = Runtime.getRuntime().exec(cmd.toString());
     }
 }
