@@ -6,8 +6,8 @@
             <PatternLayout pattern="[%-5p]%d{ISO8601},[%t][%c{3}:%L]%m%n"/>
         </Console>
         <RollingFile name="RollingFile"
-                     fileName="/home/wcy/app/logs/learnspring/app.log"
-                     filePattern="/home/wcy/app/logs/learnspring/app.%d{MM-dd-yyyy}.log"
+                     fileName="logs/learnspring/app.log"
+                     filePattern="logs/learnspring/app.%d{MM-dd-yyyy}.log"
                      append="true">
             <PatternLayout pattern="[%-5p]%d{ISO8601},[%t][%c{3}:%L]%m%n"/>
             <Policies>
