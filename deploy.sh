@@ -3,9 +3,11 @@
 #一键部署脚本
 
 APP_NAME=learnspring
-JAR_PATH=/home/wcy/project/learnspring/app/target/learnspring.jar
-DEPLOY_PATH=/home/wcy/app/learnspring.jar
-OUTPUT_PATH=/home/wcy/app/learnspring.out
+PROJECT_PATH=/home/wcy/project/learnspring
+JAR_PATH=$PROJECT_PATH/app/target/learnspring.jar
+APP_PATH=/home/wcy/app
+DEPLOY_PATH=$APP_PATH/learnspring.jar
+OUTPUT_PATH=$APP_PATH/learnspring.out
 
 
 #Stop
@@ -27,7 +29,7 @@ fi
 
 
 #Package
-cd /home/wcy/project/learnspring/
+cd $PROJECT_PATH
 
 echo '> Update Code...'
 git pull
@@ -46,6 +48,7 @@ then
 
 
     #Start
+    cd $APP_PATH
     nohup java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 -jar $DEPLOY_PATH > $OUTPUT_PATH 2>&1 &
     echo '> Start Success!'
 else
