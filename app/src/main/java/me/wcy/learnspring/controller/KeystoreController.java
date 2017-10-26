@@ -27,12 +27,12 @@ public class KeystoreController {
     private String javaPath;
     private String tempPath;
 
-    public String getJavaPath() {
-        return javaPath;
+    public void setJavaPath(String javaPath) {
+        this.javaPath = javaPath;
     }
 
-    public String getTempPath() {
-        return tempPath;
+    public void setTempPath(String tempPath) {
+        this.tempPath = tempPath;
     }
 
     @RequestMapping(value = "/api/genkey", method = RequestMethod.POST)
