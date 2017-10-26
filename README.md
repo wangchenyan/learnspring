@@ -190,13 +190,13 @@ clone项目
 ```
 复制打包脚本
 ```
-# cp /home/wcy/project/learnspring/deploy /usr/local/bin/
+# cp /home/wcy/project/learnspring/deploy.sh /usr/local/bin/
 ```
 添加可执行权限
 ```
-# chmod +x /usr/local/bin/deploy
+# chmod +x /usr/local/bin/deploy.sh
 ```
 一键部署
 ```
-# deploy
+# deploy.sh
 ```
