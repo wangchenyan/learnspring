@@ -13,6 +13,6 @@ mybatis:
   typeAliasesPackage: me.wcy.learnspring.entity
   mapperLocations: classpath:mapper/*.xml
 
-keystore:
+keytool:
   javaPath: /usr/lib/jvm/java-1.8.0/bin/
-  tempPath: /home/keystore/
+  keyPath: /home/keytool/

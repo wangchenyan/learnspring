@@ -20,20 +20,20 @@ import java.io.File;
  * Created by hzwangchenyan on 2017/10/25.
  */
 @RestController
-@ConfigurationProperties(prefix = "keystore")
+@ConfigurationProperties(prefix = "keytool")
 public class KeytoolController {
     @Autowired
     private KeytoolService keytoolService;
 
     private String javaPath;
-    private String tempPath;
+    private String keyPath;
 
     public void setJavaPath(String javaPath) {
         this.javaPath = javaPath;
     }
 
-    public void setTempPath(String tempPath) {
-        this.tempPath = tempPath;
+    public void setKeyPath(String keyPath) {
+        this.keyPath = keyPath;
     }
 
     @RequestMapping(value = "/api/keytool", method = RequestMethod.POST)
@@ -57,7 +57,7 @@ public class KeytoolController {
             return new Response(400, "param format error");
         }
 
-        String dir = tempPath;
+        String dir = keyPath;
         File dirFile = new File(dir);
         if (!dirFile.exists()) {
             dirFile.mkdirs();
