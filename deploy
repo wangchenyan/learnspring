@@ -2,10 +2,10 @@
 #
 #一键部署脚本
 
-APP_NAME=app
-JAR_PATH=/home/wcy/project/learnspring/app/target/app.jar
-DEPLOY_PATH=/home/wcy/app/app.jar
-OUTPUT_PATH=/home/wcy/app/app.out
+APP_NAME=learnspring
+JAR_PATH=/home/wcy/project/learnspring/app/target/learnspring.jar
+DEPLOY_PATH=/home/wcy/app/learnspring.jar
+OUTPUT_PATH=/home/wcy/app/learnspring.out
 
 
 #Stop
