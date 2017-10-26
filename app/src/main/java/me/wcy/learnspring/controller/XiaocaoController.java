@@ -2,6 +2,8 @@ package me.wcy.learnspring.controller;
 
 import me.wcy.learnspring.common.HttpClient;
 import me.wcy.learnspring.common.Response;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +16,7 @@ import java.util.Map;
  */
 @RestController
 public class XiaocaoController {
+    private static final Logger LOGGER = LogManager.getLogger(XiaocaoController.class);
 
     @RequestMapping(value = "/getUrl", method = RequestMethod.GET)
     public Response getUrl() {
@@ -25,6 +28,7 @@ public class XiaocaoController {
 
         try {
             String result = HttpClient.postFormData(url, null, form);
+            LOGGER.info("request xiaocao. " + result);
             return new Response(result);
         } catch (Exception e) {
             return new Response(500, "fail");
