@@ -1,11 +1,10 @@
 package me.wcy.learnspring.service.impl;
 
+import me.wcy.learnspring.common.ServiceRuntimeException;
 import me.wcy.learnspring.service.KeytoolService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 
 /**
  * Created by hzwangchenyan on 2017/10/26.
@@ -15,8 +14,8 @@ public class KeytoolServiceImpl implements KeytoolService {
     private static final Logger LOGGER = LogManager.getLogger(KeytoolServiceImpl.class);
 
     @Override
-    public boolean genKeystore(String javaPath, String filePath, String alias, String storepass, String keypass, int validity,
-                               String name, String organization, String city, String province, String countryCode) {
+    public void genKeystore(String javaPath, String filePath, String alias, String storepass, String keypass, int validity,
+                            String name, String organization, String city, String province, String countryCode) throws ServiceRuntimeException {
         try {
             StringBuilder cmd = new StringBuilder();
             cmd.append(javaPath)
@@ -39,11 +38,9 @@ public class KeytoolServiceImpl implements KeytoolService {
             String[] cmds = new String[]{"/bin/sh", "-c", cmd.toString()};
             Process process = Runtime.getRuntime().exec(cmds);
             process.waitFor();
-            return true;
-        } catch (IOException | InterruptedException e) {
+        } catch (Exception e) {
             LOGGER.error("genKeystore error", e);
+            throw new ServiceRuntimeException(500, "genKeystore error", e);
         }
-
-        return false;
     }
 }

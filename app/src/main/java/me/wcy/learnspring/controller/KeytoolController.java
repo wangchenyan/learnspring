@@ -3,8 +3,9 @@ package me.wcy.learnspring.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.qcloud.cos.request.UploadFileRequest;
-import me.wcy.learnspring.common.COS;
+import me.wcy.learnspring.cos.COSManager;
 import me.wcy.learnspring.common.Response;
+import me.wcy.learnspring.common.ServiceRuntimeException;
 import me.wcy.learnspring.service.KeytoolService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,14 +71,18 @@ public class KeytoolController {
         String path = dir + fileName;
         File file = new File(path);
 
-        boolean result = keytoolService.genKeystore(javaPath, path, alias, storepass, keypass, validity, name, organization, city, province, countryCode);
-
-        if (!result || !file.exists()) {
+        try {
+            keytoolService.genKeystore(javaPath, path, alias, storepass, keypass, validity, name, organization, city, province, countryCode);
+        } catch (ServiceRuntimeException e) {
             return new Response(500, "generate keystore failed");
         }
 
-        UploadFileRequest uploadFileRequest = new UploadFileRequest(COS.BUCKET, "/" + file.getName(), file.getAbsolutePath());
-        String uploadFileRet = COS.getCOSClient().uploadFile(uploadFileRequest);
+        if (!file.exists()) {
+            return new Response(500, "generate keystore failed");
+        }
+
+        UploadFileRequest uploadFileRequest = new UploadFileRequest(COSManager.BUCKET, "/" + file.getName(), file.getAbsolutePath());
+        String uploadFileRet = COSManager.getCOSClient().uploadFile(uploadFileRequest);
         JSONObject resultObject = JSON.parseObject(uploadFileRet);
         Integer code = resultObject.getInteger("code");
         String message = resultObject.getString("message");

@@ -1,4 +1,4 @@
-package me.wcy.learnspring.common;
+package me.wcy.learnspring.cos;
 
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
@@ -7,7 +7,7 @@ import com.qcloud.cos.sign.Credentials;
 /**
  * Created by hzwangchenyan on 2017/10/25.
  */
-public class COS {
+public class COSManager {
     public static final String BUCKET = "keystore";
     private static COSClient cosClient;
 
