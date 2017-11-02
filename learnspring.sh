@@ -4,27 +4,29 @@
 
 APP_NAME=learnspring
 PROJECT_PATH=/home/wcy/project/learnspring
-JAR_PATH=/home/wcy/project/learnspring/app/target/learnspring.jar
+JAR_PATH=${PROJECT_PATH}/app/target/learnspring.jar
 APP_PATH=/home/wcy/app/learnspring
-DEPLOY_PATH=/home/wcy/app/learnspring/learnspring.jar
-OUTPUT_PATH=/home/wcy/app/learnspring/learnspring.out
+DEPLOY_PATH=${APP_PATH}/learnspring.jar
+OUTPUT_PATH=${APP_PATH}/learnspring.out
 
 
 #Stop
 tpid=`ps -ef|grep ${APP_NAME}|grep -v grep|grep -v kill|awk '{print $2}'`
-if [ ${tpid} ];
+if [ ! -n ${tpid} ];
 then
     echo '> Stop Process...'
     kill -15 ${tpid}
-fi
-sleep 5
-tpid=`ps -ef|grep ${APP_NAME}|grep -v grep|grep -v kill|awk '{print $2}'`
-if [ ${tpid} ];
-then
-    echo '> Kill Process!'
-    kill -9 ${tpid}
-else
-    echo '> Stop Success!'
+
+    sleep 5
+
+    tpid=`ps -ef|grep ${APP_NAME}|grep -v grep|grep -v kill|awk '{print $2}'`
+    if [ ! -n ${tpid} ];
+    then
+        echo '> Kill Process!'
+        kill -9 ${tpid}
+    else
+        echo '> Stop Success!'
+    fi
 fi
 
 
