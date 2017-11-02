@@ -4,10 +4,10 @@
 
 APP_NAME=learnspring
 PROJECT_PATH=/home/wcy/project/learnspring
-JAR_PATH=${PROJECT_PATH}/app/target/learnspring.jar
+JAR_PATH=/home/wcy/project/learnspring/app/target/learnspring.jar
 APP_PATH=/home/wcy/app/learnspring
-DEPLOY_PATH=${APP_PATH}/learnspring.jar
-OUTPUT_PATH=${APP_PATH}/learnspring.out
+DEPLOY_PATH=/home/wcy/app/learnspring/learnspring.jar
+OUTPUT_PATH=/home/wcy/app/learnspring/learnspring.out
 
 
 #Stop
