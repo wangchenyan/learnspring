@@ -2,22 +2,19 @@
 #
 #一键部署脚本
 
-APP_NAME=learnspring.jar
+PROCESS_NAME=learnspring.jar
 PROJECT_PATH=/home/wcy/project/learnspring
 JAR_PATH=${PROJECT_PATH}/app/target/learnspring.jar
 APP_PATH=/home/wcy/app/learnspring
 DEPLOY_PATH=${APP_PATH}/learnspring.jar
 OUTPUT_PATH=${APP_PATH}/learnspring.out
 
-
 #Stop
-PROCESS=`ps -ef|grep ${APP_NAME}|grep -v grep|grep -v PPID|awk '{ print $2}'`
-for i in ${PROCESS}
-do
-    echo "> Kill the ${APP_NAME} process [ ${i} ]"
-    kill -9 ${i}
-done
-
+PID=`ps -ef|grep ${PROCESS_NAME}|grep -v grep|grep -v PPID|awk '{ print $2}'`
+if [ ${PID} ];then
+    echo '> Kill Process!'
+    kill -9 ${PID}
+fi
 
 #Package
 cd ${PROJECT_PATH}
@@ -36,12 +33,9 @@ if [ -f ${JAR_PATH} ];then
     cp -rf ${JAR_PATH} ${DEPLOY_PATH}
     echo '> Copy Success!'
 
-
     #Start
     cd ${APP_PATH}
-    rm -f tpid
     nohup java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 -jar ${DEPLOY_PATH} > ${OUTPUT_PATH} 2>&1 &
-    echo $! > tpid
     echo '> Start Success!'
 else
     echo '> Package Failed!'
