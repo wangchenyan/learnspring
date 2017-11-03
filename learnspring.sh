@@ -48,7 +48,7 @@ if [ -f ${JAR_PATH} ];then
 
     #Start
     cd ${APP_PATH}
-    nohup java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 -jar ${DEPLOY_PATH} > ${OUTPUT_PATH} 2>&1 &
+    nohup java -jar ${DEPLOY_PATH} > ${OUTPUT_PATH} 2>&1 &
     echo '> Start Success!'
 else
     echo '> Package Failed!'
