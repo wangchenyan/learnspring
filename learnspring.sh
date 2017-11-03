@@ -15,7 +15,7 @@ PROCESS=`ps -ef|grep ${APP_NAME}|grep -v grep|grep -v PPID|awk '{ print $2}'`
 for i in ${PROCESS}
 do
     echo "> Kill the ${APP_NAME} process [ ${i} ]"
-    kill -9 ${i}
+    kill -2 ${i}
 done
 
 
