@@ -2,7 +2,7 @@
 #
 #一键部署脚本
 
-APP_NAME=learnspring
+APP_NAME=learnspring.jar
 PROJECT_PATH=/home/wcy/project/learnspring
 JAR_PATH=${PROJECT_PATH}/app/target/learnspring.jar
 APP_PATH=/home/wcy/app/learnspring
@@ -15,7 +15,7 @@ PROCESS=`ps -ef|grep ${APP_NAME}|grep -v grep|grep -v PPID|awk '{ print $2}'`
 for i in ${PROCESS}
 do
     echo "> Kill the ${APP_NAME} process [ ${i} ]"
-    kill -2 ${i}
+    kill -9 ${i}
 done
 
 
