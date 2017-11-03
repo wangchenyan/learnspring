@@ -3,22 +3,24 @@
 #一键部署脚本
 
 APP_NAME=learnspring
-WAR_PATH=/home/wcy/project/learnspring/app/target/learnspring.jar
-DEPLOY_PATH=/home/wcy/app/learnspring/learnspring.jar
-OUTPUT_PATH=/home/wcy/app/learnspring/learnspring.out
+PROJECT_PATH=/home/wcy/project/learnspring
+JAR_PATH=${PROJECT_PATH}/app/target/learnspring.jar
+APP_PATH=/home/wcy/app/learnspring
+DEPLOY_PATH=${APP_PATH}/learnspring.jar
+OUTPUT_PATH=${APP_PATH}/learnspring.out
 
 
 #Stop
 tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
-if [ ${tpid} ];
-then
+if [ ${tpid} ];then
     echo '> Stop Process...'
     kill -15 $tpid
 fi
+
 sleep 5
+
 tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
-if [ ${tpid} ];
-then
+if [ ${tpid} ];then
     echo '> Kill Process!'
     kill -9 $tpid
 else
@@ -27,7 +29,7 @@ fi
 
 
 #Package
-cd /home/wcy/project/learnspring/
+cd ${PROJECT_PATH}
 
 echo '> Update Code...'
 git pull
@@ -38,16 +40,16 @@ mvn clean
 echo '> Package...'
 mvn package
 
-if [ -f $WAR_PATH ];
-then
+if [ -f ${JAR_PATH} ];then
     echo '> Package Success!'
-    cp -rf $WAR_PATH $DEPLOY_PATH
+    cp -rf ${JAR_PATH} ${DEPLOY_PATH}
     echo '> Copy Success!'
 
 
     #Start
-    nohup java -jar $DEPLOY_PATH > $OUTPUT_PATH 2>&1 &
-    echo 'Start Success!'
+    cd ${APP_PATH}
+    nohup java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005 -jar ${DEPLOY_PATH} > ${OUTPUT_PATH} 2>&1 &
+    echo '> Start Success!'
 else
     echo '> Package Failed!'
 fi
