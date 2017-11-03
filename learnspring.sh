@@ -12,21 +12,19 @@ OUTPUT_PATH=${APP_PATH}/learnspring.out
 
 #Stop
 tpid=`ps -ef|grep ${APP_NAME}|grep -v grep|grep -v kill|awk '{print $2}'`
-if [ ! -n ${tpid} ];
-then
+if [ ${tpid} ];then
     echo '> Stop Process...'
     kill -15 ${tpid}
+fi
 
-    sleep 5
+sleep 5
 
-    tpid=`ps -ef|grep ${APP_NAME}|grep -v grep|grep -v kill|awk '{print $2}'`
-    if [ ! -n ${tpid} ];
-    then
-        echo '> Kill Process!'
-        kill -9 ${tpid}
-    else
-        echo '> Stop Success!'
-    fi
+tpid=`ps -ef|grep ${APP_NAME}|grep -v grep|grep -v kill|awk '{print $2}'`
+if [ ${tpid} ];then
+    echo '> Kill Process!'
+    kill -9 ${tpid}
+else
+    echo '> Stop Success!'
 fi
 
 
@@ -42,8 +40,7 @@ mvn clean
 echo '> Package...'
 mvn package
 
-if [ -f ${JAR_PATH} ];
-then
+if [ -f ${JAR_PATH} ];then
     echo '> Package Success!'
     cp -rf ${JAR_PATH} ${DEPLOY_PATH}
     echo '> Copy Success!'
