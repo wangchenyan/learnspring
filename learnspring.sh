@@ -12,6 +12,7 @@ OUTPUT_PATH=${APP_PATH}/learnspring.out
 
 #Stop
 tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
+echo 'comond is ' `ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
 echo 'tpid is '$tpid
 
 if [ ${tpid} ];then
