@@ -1,16 +1,29 @@
+server:
+  port: 8100
+
 spring:
+  application:
+    name: app
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/wcy
     username: root
     password: wcy19930921
+
   redis:
     host: localhost
     port: 6379
     password: wcy19930921
 
+  dubbo:
+    application:
+      name: app-consumer
+    registry:
+      address: zookeeper://127.0.0.1:2181
+    scan: me.wcy.spring.app.remote
+
 mybatis:
-  typeAliasesPackage: me.wcy.learnspring.entity
+  typeAliasesPackage: me.wcy.spring.app.entity
   mapperLocations: classpath:mapper/*.xml
 
 keytool:

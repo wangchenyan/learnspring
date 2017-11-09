@@ -1,0 +1,15 @@
+server:
+  port: 8102
+
+spring:
+  application:
+    name: printer
+  dubbo:
+    application:
+      name: printer-provider
+    registry:
+      address: zookeeper://127.0.0.1:2181
+    protocol:
+      name: dubbo
+      port: 20880
+    scan: me.wcy.spring.printer.remote

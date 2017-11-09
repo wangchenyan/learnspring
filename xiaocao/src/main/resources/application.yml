@@ -1,0 +1,14 @@
+server:
+  port: 8101
+spring:
+  application:
+    name: xiaocao
+  dubbo:
+    application:
+      name: xiaocao-provider
+    registry:
+      address: zookeeper://127.0.0.1:2181
+    protocol:
+      name: dubbo
+      port: 20881
+    scan: me.wcy.spring.xiaocao.remote
