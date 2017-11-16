@@ -32,13 +32,11 @@ public class LicenseController {
 
     @RequestMapping("/releaseTicket.action")
     public void releaseTicket(HttpServletResponse httpServletResponse) {
-        LOGGER.info("releaseTicket.action");
         httpServletResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
 
     @RequestMapping("ping.action")
     public String ping(String salt) throws Exception {
-        LOGGER.info("ping.action");
         String content = "<PingResponse>" +
                 "<message></message>" +
                 "<responseCode>OK</responseCode>" +
