@@ -3,8 +3,8 @@
 #一键部署脚本
 
 PROCESS_NAME=learnspring.jar
-PROJECT_PATH=/home/wcy/project/learnspring
-JAR_PATH=${PROJECT_PATH}/app/target/learnspring.jar
+PROJECT_PATH=/home/wcy/project/learnspring/app
+JAR_PATH=${PROJECT_PATH}/target/learnspring.jar
 APP_PATH=/home/wcy/app/learnspring
 DEPLOY_PATH=${APP_PATH}/learnspring.jar
 OUTPUT_PATH=${APP_PATH}/learnspring.out

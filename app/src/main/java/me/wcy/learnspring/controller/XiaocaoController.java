@@ -18,8 +18,8 @@ import java.util.Map;
 public class XiaocaoController {
     private static final Logger LOGGER = LogManager.getLogger(XiaocaoController.class);
 
-    @RequestMapping(value = "/getUrl", method = RequestMethod.GET)
-    public Response getUrl() {
+    @RequestMapping(value = "/xiaocao", method = RequestMethod.GET)
+    public Response xiaocao() {
         String url = "http://get.xunfs.com/app/listapp.php";
         Map<String, String> form = new HashMap<>();
         form.put("a", "get");
