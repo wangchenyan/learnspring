@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan("me.wcy.learnspring.dao")
-public class Application {
+public class AppApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(AppApplication.class, args);
 
         //ASRController.asr();
     }
