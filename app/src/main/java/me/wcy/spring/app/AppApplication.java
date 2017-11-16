@@ -1,5 +1,6 @@
 package me.wcy.spring.app;
 
+import me.wcy.spring.remote.zipkin.EnableDubboTrace;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan("me.wcy.spring.app.dao")
+@EnableDubboTrace
 public class AppApplication {
     public static void main(String[] args) {
         SpringApplication.run(AppApplication.class, args);

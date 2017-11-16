@@ -19,8 +19,13 @@ spring:
     application:
       name: app-consumer
     registry:
-      address: zookeeper://127.0.0.1:2181
+      address: zookeeper://localhost:2181
     scan: me.wcy.spring.app.remote
+
+zipkin:
+  enable: true
+  baseUrl: http://localhost:9411
+  serviceName: app
 
 mybatis:
   typeAliasesPackage: me.wcy.spring.app.entity
