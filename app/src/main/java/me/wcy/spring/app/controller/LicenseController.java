@@ -1,6 +1,8 @@
 package me.wcy.spring.app.controller;
 
 import me.wcy.spring.app.common.LicenseUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,9 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/rpc")
 public class LicenseController {
+    private static final Logger LOGGER = LogManager.getLogger(LicenseController.class);
 
     @RequestMapping("/obtainTicket.action")
     public String obtainTicket(String salt, String userName) throws Exception {
+        LOGGER.info("obtainTicket.action");
         String content = "<ObtainTicketResponse>" +
                 "<message></message>" +
                 "<prolongationPeriod>607875500</prolongationPeriod>" +
