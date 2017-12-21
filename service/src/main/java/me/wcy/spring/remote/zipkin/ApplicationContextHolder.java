@@ -19,9 +19,9 @@ public class ApplicationContextHolder implements ApplicationContextAware {
     }
 
     public static <T> T getBean(Class<T> requiredType) {
-        if (applicationContext == null) {
-            return null;
+        if (applicationContext != null) {
+            return applicationContext.getBean(requiredType);
         }
-        return applicationContext.getBean(requiredType);
+        return null;
     }
 }

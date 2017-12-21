@@ -20,19 +20,16 @@ public class BraveDubboFilter implements Filter {
         this.clientRequestInterceptor = clientRequestInterceptor;
     }
 
-    public BraveDubboFilter setClientResponseInterceptor(ClientResponseInterceptor clientResponseInterceptor) {
+    public void setClientResponseInterceptor(ClientResponseInterceptor clientResponseInterceptor) {
         this.clientResponseInterceptor = clientResponseInterceptor;
-        return this;
     }
 
-    public BraveDubboFilter setServerRequestInterceptor(ServerRequestInterceptor serverRequestInterceptor) {
+    public void setServerRequestInterceptor(ServerRequestInterceptor serverRequestInterceptor) {
         this.serverRequestInterceptor = serverRequestInterceptor;
-        return this;
     }
 
-    public BraveDubboFilter setServerResponseInterceptor(ServerResponseInterceptor serverResponseInterceptor) {
+    public void setServerResponseInterceptor(ServerResponseInterceptor serverResponseInterceptor) {
         this.serverResponseInterceptor = serverResponseInterceptor;
-        return this;
     }
 
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
@@ -40,13 +37,6 @@ public class BraveDubboFilter implements Filter {
         if ("com.alibaba.dubbo.monitor.MonitorService".equals(invoker.getInterface().getName())) {
             return invoker.invoke(invocation);
         }
-
-        RpcContext context = RpcContext.getContext();
-        // 调用的方法名 以此作为 span name
-        String methodName = invocation.getMethodName();
-
-        // provider 应用相关信息
-        StatusEnum status = StatusEnum.OK;
 
         if ("0".equals(invocation.getAttachment(DubboTraceConst.SAMPLED))
                 || "false".equals(invocation.getAttachment(DubboTraceConst.SAMPLED))) {
@@ -58,7 +48,11 @@ public class BraveDubboFilter implements Filter {
             return invoker.invoke(invocation);
         }
 
-        if (context.isConsumerSide()) {
+        StatusEnum status = StatusEnum.OK;
+        // 调用的方法名 以此作为 span name
+        String methodName = invocation.getMethodName();
+
+        if (RpcContext.getContext().isConsumerSide()) {
             System.out.println("consumer execute");
             // Client side
             clientRequestInterceptor.handle(new DubboClientRequestAdapter(invocation.getAttachments(), methodName));
@@ -73,9 +67,9 @@ public class BraveDubboFilter implements Filter {
                 clientResponseInterceptor.handle(clientResponseAdapter);
             }
             return result;
-        } else if (context.isProviderSide()) {
+        } else if (RpcContext.getContext().isProviderSide()) {
             System.out.println("provider execute");
-            serverRequestInterceptor.handle(new DubboServerRequestAdapter(context.getAttachments(), methodName));
+            serverRequestInterceptor.handle(new DubboServerRequestAdapter(RpcContext.getContext().getAttachments(), methodName));
             Result result;
             try {
                 result = invoker.invoke(invocation);
