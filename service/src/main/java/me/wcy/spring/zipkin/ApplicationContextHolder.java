@@ -1,4 +1,4 @@
-package me.wcy.spring.remote.zipkin;
+package me.wcy.spring.zipkin;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

@@ -1,4 +1,4 @@
-package me.wcy.spring.remote.zipkin;
+package me.wcy.spring.zipkin;
 
 import com.alibaba.dubbo.common.Constants;
 import com.alibaba.dubbo.common.extension.Activate;

@@ -15,44 +15,4 @@
         <module>service</module>
         <module>printer</module>
     </modules>
-
-    <dependencies>
-        <dependency>
-            <groupId>io.dubbo.springboot</groupId>
-            <artifactId>spring-boot-starter-dubbo</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <!--<dependency>-->
-        <!--<groupId>com.github.jessyZu</groupId>-->
-        <!--<artifactId>dubbo-zipkin-spring-starter</artifactId>-->
-        <!--<version>1.0.2</version>-->
-        <!--</dependency>-->
-
-        <dependency>
-            <groupId>io.zipkin.brave</groupId>
-            <artifactId>brave-core</artifactId>
-            <version>3.9.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.zipkin.brave</groupId>
-            <artifactId>brave-http</artifactId>
-            <version>3.9.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.zipkin.brave</groupId>
-            <artifactId>brave-spancollector-http</artifactId>
-            <version>3.9.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.zipkin.brave</groupId>
-            <artifactId>brave-web-servlet-filter</artifactId>
-            <version>3.9.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.zipkin.brave</groupId>
-            <artifactId>brave-okhttp</artifactId>
-            <version>3.9.0</version>
-        </dependency>
-    </dependencies>
 </project>

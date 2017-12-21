@@ -22,6 +22,12 @@ spring:
       address: zookeeper://localhost:2181
     scan: me.wcy.spring.app.remote
 
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: root
+
 zipkin:
   enable: true
   baseUrl: http://localhost:9411

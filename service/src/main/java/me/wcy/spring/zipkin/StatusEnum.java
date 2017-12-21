@@ -1,4 +1,4 @@
-package me.wcy.spring.remote.zipkin;
+package me.wcy.spring.zipkin;
 
 /**
  * Created by hzwangchenyan on 2017/11/9.

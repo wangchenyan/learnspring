@@ -207,3 +207,30 @@ clone项目
 添加
 /usr/local/bin/learnspring.sh
 ```
+
+### 安装 RabbitMQ
+
+1. 安装Erland
+2. 安装RabbitMQ
+3. 启动
+```
+rabbitmq-server start
+```
+4. 添加用户
+```
+// 用户名和密码都是root
+rabbitmqctl add_user root root
+// 授予管理权限
+rabbitmqctl set_user_tags root administrator
+// 授予访问权限
+rabbitmqctl set_permissions -p / root '.*' '.*' '.*'
+```
+5. 开启管理界面插件
+```
+rabbitmq-plugins enable rabbitmq_management
+// 重启RabbitMQ
+rabbitmq-server stop
+rabbitmq-server start
+// 通过以下地址访问管理界面
+http://本地IP:15672
+```

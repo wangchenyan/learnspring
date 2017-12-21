@@ -1,7 +1,7 @@
-package me.wcy.spring.remote.zipkin;
+package me.wcy.spring.zipkin;
 
-import com.github.kristofa.brave.ClientResponseAdapter;
 import com.github.kristofa.brave.KeyValueAnnotation;
+import com.github.kristofa.brave.ServerResponseAdapter;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -9,10 +9,10 @@ import java.util.Collections;
 /**
  * Created by hzwangchenyan on 2017/11/9.
  */
-public class DubboClientResponseAdapter implements ClientResponseAdapter {
+public class DubboServerResponseAdapter implements ServerResponseAdapter {
     private StatusEnum status;
 
-    public DubboClientResponseAdapter(StatusEnum status) {
+    public DubboServerResponseAdapter(StatusEnum status) {
         this.status = status;
     }
 

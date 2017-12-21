@@ -1,4 +1,4 @@
-package me.wcy.spring.remote.zipkin;
+package me.wcy.spring.zipkin;
 
 import com.github.kristofa.brave.Brave;
 import com.github.kristofa.brave.EmptySpanCollectorMetricsHandler;

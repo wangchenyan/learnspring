@@ -1,6 +1,6 @@
 package me.wcy.spring.app;
 
-import me.wcy.spring.remote.zipkin.EnableDubboTrace;
+import me.wcy.spring.zipkin.EnableDubboTrace;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

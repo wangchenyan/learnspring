@@ -4,6 +4,7 @@ server:
 spring:
   application:
     name: printer
+
   dubbo:
     application:
       name: printer-provider
@@ -13,6 +14,12 @@ spring:
       name: dubbo
       port: 20880
     scan: me.wcy.spring.printer.remote
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: root
 
 zipkin:
   enable: true
