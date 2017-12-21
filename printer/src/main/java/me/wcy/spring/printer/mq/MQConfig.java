@@ -1,6 +1,7 @@
-package me.wcy.spring.app.mq;
+package me.wcy.spring.printer.mq;
 
 import org.springframework.amqp.core.Queue;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,10 +9,12 @@ import org.springframework.context.annotation.Configuration;
  * Created by hzwangchenyan on 2017/12/21.
  */
 @Configuration
-public class RabbitConfig {
+public class MQConfig {
+    @Value("${spring.rabbitmq.queue}")
+    private String queue;
 
     @Bean
-    public Queue helloQueue() {
-        return new Queue("hello");
+    public Queue queue() {
+        return new Queue(queue);
     }
 }

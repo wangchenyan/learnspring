@@ -1,8 +1,10 @@
 server:
   port: 8101
+
 spring:
   application:
     name: xiaocao
+
   dubbo:
     application:
       name: xiaocao-provider
@@ -12,6 +14,17 @@ spring:
       name: dubbo
       port: 20881
     scan: me.wcy.spring.xiaocao.remote
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: KG
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    topic: KT
 
 zipkin:
   enable: true

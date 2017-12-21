@@ -1,6 +1,5 @@
-package me.wcy.spring.printer;
+package me.wcy.spring.printer.mq;
 
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -8,11 +7,10 @@ import org.springframework.stereotype.Component;
  * Created by hzwangchenyan on 2017/12/21.
  */
 @Component
-@RabbitListener(queues = "hello")
-public class Receiver {
+public class MQConsumer {
 
-    @RabbitHandler
+    @RabbitListener(queues = "${spring.rabbitmq.queue}")
     public void process(String message) {
-        System.out.println("Receiver msg: " + message);
+        System.out.println("MQ receive: " + message);
     }
 }
