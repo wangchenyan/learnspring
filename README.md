@@ -292,3 +292,12 @@ rabbitmq-server -detached
 // 通过以下地址访问管理界面
 http://本地IP:15672
 ```
+
+### 安装Kafka
+
+1. 下载解压
+```
+# wget http://mirrors.hust.edu.cn/apache/kafka/1.0.0/kafka_2.11-1.0.0.tgz
+# tar -zxf kafka_2.11-1.0.0.tgz
+```
+2. 启动
