@@ -1,0 +1,28 @@
+server:
+  port: 8102
+
+spring:
+  application:
+    name: printer
+
+  dubbo:
+    application:
+      name: printer-provider
+    registry:
+      address: zookeeper://localhost:2181
+    protocol:
+      name: dubbo
+      port: 20880
+    scan: me.wcy.spring.printer.remote
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: root
+    queue: MQQ
+
+zipkin:
+  enable: true
+  baseUrl: http://localhost:9411
+  serviceName: printer
