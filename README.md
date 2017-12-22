@@ -26,6 +26,30 @@ yum安装
 # yum install -y java-1.8.0-openjdk*
 ```
 
+### 安装tomcat
+创建个人文件夹
+```
+# cd /home
+# mkdir wcy
+# cd wcy
+```
+下载并解压
+```
+# wget http://mirror.bit.edu.cn/apache/tomcat/tomcat-7/v7.0.81/bin/apache-tomcat-7.0.81.tar.gz
+# tar -zxf apache-tomcat-7.0.81.tar.gz
+```
+启动tomcat
+```
+# cd apache-tomcat-7.0.81/bin/
+# ./startup.sh
+```
+设置开机自启
+```
+# vi /etc/rc.d/rc.local
+添加
+/home/wcy/software/apache-tomcat-7.0.81/bin/startup.sh
+```
+
 ### 安装lrzsz
 ```
 # yum install -y lrzsz
@@ -208,15 +232,48 @@ clone项目
 /usr/local/bin/learnspring.sh
 ```
 
+### 安装 Zookeeper
+
+1. 下载解压
+```
+# cd /home/wcy/software/
+# wget http://mirrors.hust.edu.cn/apache/zookeeper/stable/zookeeper-3.4.10.tar.gz
+# tar -zxf zookeeper-3.4.10.tar.gz
+```
+2. 配置
+```
+# cd zookeeper-3.4.10/conf/
+# cp zoo_sample.cfg zoo.cfg
+```
+3. 启动
+```
+# cd zookeeper-3.4.10/bin/
+# ./zkServer.sh start
+```
+
+### 安装 Dubbo 管理界面
+
+克隆Dubbo项目，打包dubbo-admin，把打包后的war放到tomcat
+
 ### 安装 RabbitMQ
 
-1. 安装Erland
-2. 安装RabbitMQ
-3. 启动
+1. 安装
+```
+// 安装Erland
+# wget https://dl.bintray.com/rabbitmq/rpm/erlang/19/el/6/x86_64/erlang-19.3.6.5-1.el6.x86_64.rpm
+# yum -y install erlang-19.3.6.5-1.el6.x86_64.rpm
+// 安装socat
+# wget –no-cache http://www.convirture.com/repos/definitions/rhel/6.x/convirt.repo -O /etc/yum.repos.d/convirt.repo
+# yum install socat
+// 安装RabbitMQ
+# wget https://dl.bintray.com/rabbitmq/all/rabbitmq-server/3.7.1/rabbitmq-server-3.7.1-1.el6.noarch.rpm
+# yum -y install rabbitmq-server-3.7.1-1.el6.noarch.rpm
+```
+2. 启动
 ```
 rabbitmq-server start
 ```
-4. 添加用户
+3. 添加用户
 ```
 // 用户名和密码都是root
 rabbitmqctl add_user root root
@@ -225,12 +282,13 @@ rabbitmqctl set_user_tags root administrator
 // 授予访问权限
 rabbitmqctl set_permissions -p / root '.*' '.*' '.*'
 ```
-5. 开启管理界面插件
+4. 开启管理界面插件
 ```
 rabbitmq-plugins enable rabbitmq_management
 // 重启RabbitMQ
 rabbitmq-server stop
-rabbitmq-server start
+// 后台启动
+rabbitmq-server -detached
 // 通过以下地址访问管理界面
 http://本地IP:15672
 ```
