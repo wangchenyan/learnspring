@@ -271,24 +271,24 @@ clone项目
 ```
 2. 启动
 ```
-rabbitmq-server start
+# rabbitmq-server start
 ```
 3. 添加用户
 ```
 // 用户名和密码都是root
-rabbitmqctl add_user root root
+# rabbitmqctl add_user root root
 // 授予管理权限
-rabbitmqctl set_user_tags root administrator
+# rabbitmqctl set_user_tags root administrator
 // 授予访问权限
-rabbitmqctl set_permissions -p / root '.*' '.*' '.*'
+# rabbitmqctl set_permissions -p / root '.*' '.*' '.*'
 ```
 4. 开启管理界面插件
 ```
-rabbitmq-plugins enable rabbitmq_management
+# rabbitmq-plugins enable rabbitmq_management
 // 重启RabbitMQ
-rabbitmq-server stop
+# rabbitmq-server stop
 // 后台启动
-rabbitmq-server -detached
+# rabbitmq-server -detached
 // 通过以下地址访问管理界面
 http://本地IP:15672
 ```
@@ -301,3 +301,7 @@ http://本地IP:15672
 # tar -zxf kafka_2.11-1.0.0.tgz
 ```
 2. 启动
+```
+# cd kafka_2.11-1.0.0
+# bin/kafka-server-start.sh config/server.properties &
+```
