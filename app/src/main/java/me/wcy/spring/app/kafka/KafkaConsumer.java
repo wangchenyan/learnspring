@@ -1,11 +1,9 @@
 package me.wcy.spring.app.kafka;
 
-import org.springframework.stereotype.Component;
-
 /**
  * Created by hzwangchenyan on 2017/12/21.
  */
-@Component
+//@Component
 public class KafkaConsumer {
 
     //@KafkaListener(topics = "${spring.kafka.topic}")

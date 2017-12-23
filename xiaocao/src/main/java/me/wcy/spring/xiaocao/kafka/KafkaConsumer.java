@@ -1,15 +1,12 @@
 package me.wcy.spring.xiaocao.kafka;
 
-import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.stereotype.Component;
-
 /**
  * Created by hzwangchenyan on 2017/12/21.
  */
-@Component
+//@Component
 public class KafkaConsumer {
 
-    @KafkaListener(topics = "${spring.kafka.topic}")
+    //@KafkaListener(topics = "${spring.kafka.topic}")
     public void processMessage(String message) {
         System.out.println("kafka receive: " + message);
     }
