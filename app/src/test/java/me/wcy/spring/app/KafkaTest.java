@@ -1,6 +1,5 @@
 package me.wcy.spring.app;
 
-import com.alibaba.fastjson.JSON;
 import me.wcy.spring.app.kafka.KafkaMessage;
 import me.wcy.spring.app.kafka.KafkaProducer;
 import org.junit.Test;
@@ -26,6 +25,6 @@ public class KafkaTest {
         message.setId(id++);
         message.setMsg("the message of id " + message.getId());
         message.setTime(System.currentTimeMillis());
-        kafkaProducer.send(JSON.toJSONString(message));
+        // kafkaProducer.send(JSON.toJSONString(message));
     }
 }

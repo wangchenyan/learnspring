@@ -22,7 +22,7 @@ public class MQController {
     @RequestMapping(value = "/send", method = RequestMethod.GET)
     public Response sendMessage(@RequestParam("msg") String msg) {
         mqProducer.send(msg);
-        kafkaProducer.send(msg);
+        // kafkaProducer.send(msg);
         return new Response("OK");
     }
 }
