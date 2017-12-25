@@ -43,7 +43,7 @@ public class BraveDubboFilter implements Filter {
             return invoker.invoke(invocation);
         }
 
-        //注入
+        // 注入
         if (!inject()) {
             return invoker.invoke(invocation);
         }
@@ -53,8 +53,6 @@ public class BraveDubboFilter implements Filter {
         String methodName = invocation.getMethodName();
 
         if (RpcContext.getContext().isConsumerSide()) {
-            System.out.println("consumer execute");
-            // Client side
             clientRequestInterceptor.handle(new DubboClientRequestAdapter(invocation.getAttachments(), methodName));
             Result result;
             try {
@@ -68,7 +66,6 @@ public class BraveDubboFilter implements Filter {
             }
             return result;
         } else if (RpcContext.getContext().isProviderSide()) {
-            System.out.println("provider execute");
             serverRequestInterceptor.handle(new DubboServerRequestAdapter(RpcContext.getContext().getAttachments(), methodName));
             Result result;
             try {
