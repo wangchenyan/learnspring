@@ -25,7 +25,7 @@ killProcess(){
 
 # $1 JAR_PATH $2 DEPLOY_PATH $3 OUTPUT_PATH $4 DEBUG_PORT $5 NAME
 deploy(){
-    if [ -f $1} ];then
+    if [ -f $1 ];then
         echo "> Package Success $5!"
         cp -rf $1 $2
         echo "> Copy Success $5!"
