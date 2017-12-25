@@ -14,6 +14,31 @@ OUTPUT_PATH_APP=${DEPLOY_PATH}/learnspring.out
 OUTPUT_PATH_XIAOCAO=${DEPLOY_PATH}/xiaocao.out
 OUTPUT_PATH_PRINTER=${DEPLOY_PATH}/printer.out
 
+# $1 PROCESS_NAME
+killProcess(){
+    PID=`ps -ef|grep $1|grep -v grep|grep -v PPID|awk '{print $2}'`
+    if [ ${PID} ];then
+        echo "> Kill Process $1!"
+        kill -9 ${PID}
+    fi
+}
+
+# $1 JAR_PATH $2 DEPLOY_PATH $3 OUTPUT_PATH $4 DEBUG_PORT $5 NAME
+deploy(){
+    if [ -f $1} ];then
+        echo "> Package Success $5!"
+        cp -rf $1 $2
+        echo "> Copy Success $5!"
+
+        #Start
+        cd ${DEPLOY_PATH}
+        nohup java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=$4 -jar $2 >$3 2>&1 &
+        echo "> Start Success $5!"
+    else
+        echo "> Package Failed $5!"
+    fi
+}
+
 #Stop
 killProcess learnspring.jar
 killProcess xiaocao.jar
@@ -40,28 +65,3 @@ deploy ${JAR_PATH_XIAOCAO} ${DEPLOY_PATH_XIAOCAO} ${OUTPUT_PATH_XIAOCAO} 5006 'X
 sleep 3s
 deploy ${JAR_PATH_APP} ${DEPLOY_PATH_APP} ${OUTPUT_PATH_APP} 5005 'App'
 sleep 3s
-
-# $1 PROCESS_NAME
-killProcess(){
-    PID=`ps -ef|grep $1|grep -v grep|grep -v PPID|awk '{print $2}'`
-    if [ ${PID} ];then
-        echo "> Kill Process $1!"
-        kill -9 ${PID}
-    fi
-}
-
-# $1 JAR_PATH $2 DEPLOY_PATH $3 OUTPUT_PATH $4 DEBUG_PORT $5 NAME
-deploy(){
-    if [ -f $1} ];then
-        echo "> Package Success $5!"
-        cp -rf $1 $2
-        echo "> Copy Success $5!"
-
-        #Start
-        cd ${DEPLOY_PATH}
-        nohup java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=$4 -jar $2 >$3 2>&1 &
-        echo "> Start Success $5!"
-    else
-        echo "> Package Failed $5!"
-    fi
-}
