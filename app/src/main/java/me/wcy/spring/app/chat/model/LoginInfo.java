@@ -1,4 +1,4 @@
-package me.wcy.spring.app.chat;
+package me.wcy.spring.app.chat.model;
 
 import com.alibaba.fastjson.JSON;
 

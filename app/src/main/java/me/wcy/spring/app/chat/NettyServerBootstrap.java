@@ -32,16 +32,18 @@ public class NettyServerBootstrap {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) {
-                        ChannelPipeline p = socketChannel.pipeline();
-                        p.addLast(new ObjectEncoder());
-                        p.addLast(new ObjectDecoder(ClassResolvers.cacheDisabled(null)));
-                        p.addLast(new NettyServerHandler());
+                        ChannelPipeline pipeline = socketChannel.pipeline();
+                        pipeline.addLast(new ObjectEncoder());
+                        pipeline.addLast(new ObjectDecoder(ClassResolvers.cacheDisabled(null)));
+                        pipeline.addLast(new NettyServerHandler());
                     }
                 })
                 .bind(port)
                 .addListener((ChannelFutureListener) future -> {
                     if (future.isSuccess()) {
                         System.out.println("netty server start");
+                    } else {
+                        System.out.println("netty server start failed");
                     }
                 });
     }

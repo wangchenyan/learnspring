@@ -6,6 +6,9 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.ReferenceCountUtil;
+import me.wcy.spring.app.chat.model.CMessage;
+import me.wcy.spring.app.chat.model.LoginInfo;
+import me.wcy.spring.app.chat.model.MsgType;
 
 import java.util.HashSet;
 import java.util.Set;
