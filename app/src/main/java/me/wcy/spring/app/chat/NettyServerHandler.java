@@ -46,22 +46,24 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
         if (message.getType() == MsgType.PING) {
             Channel channel = NettyChannelMap.get(message.getFrom());
             if (channel != null) {
-                channel.writeAndFlush(message.toString());
+                channel.writeAndFlush(message.toJson());
             }
         } else if (message.getType() == MsgType.LOGIN) {
             LoginInfo loginInfo = JSON.parseObject(message.getContent(), LoginInfo.class);
             if (verifyLoginInfo(loginInfo)) {
                 loginInfo.setResult(200);
-                ctx.channel().writeAndFlush(message.toString());
+                message.setContent(loginInfo.toJson());
+                ctx.channel().writeAndFlush(message.toJson());
                 NettyChannelMap.add(loginInfo.getAccount(), ctx.channel());
             } else {
                 loginInfo.setResult(400);
-                ctx.channel().writeAndFlush(message.toString());
+                message.setContent(loginInfo.toJson());
+                ctx.channel().writeAndFlush(message.toJson());
             }
         } else if (message.getType() == MsgType.TEXT) {
             Channel channel = NettyChannelMap.get(message.getTo());
             if (channel != null) {
-                channel.writeAndFlush(message.toString());
+                channel.writeAndFlush(message.toJson());
             }
         }
         ReferenceCountUtil.release(msg);

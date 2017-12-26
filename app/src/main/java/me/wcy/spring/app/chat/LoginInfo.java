@@ -1,5 +1,7 @@
 package me.wcy.spring.app.chat;
 
+import com.alibaba.fastjson.JSON;
+
 import java.io.Serializable;
 
 /**
@@ -17,6 +19,10 @@ public class LoginInfo implements Serializable {
                 && ((LoginInfo) obj).account.equals(this.account)
                 && ((LoginInfo) obj).token != null
                 && ((LoginInfo) obj).token.equals(this.token);
+    }
+
+    public String toJson() {
+        return JSON.toJSONString(this);
     }
 
     public String getAccount() {

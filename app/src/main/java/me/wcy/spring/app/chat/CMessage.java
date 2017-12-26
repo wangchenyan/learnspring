@@ -13,8 +13,7 @@ public class CMessage implements Serializable {
     private int type;
     private String content;
 
-    @Override
-    public String toString() {
+    public String toJson() {
         return JSON.toJSONString(this);
     }
 
