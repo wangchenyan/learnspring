@@ -2,6 +2,7 @@ package me.wcy.spring.app.chat;
 
 import com.alibaba.fastjson.JSON;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.ReferenceCountUtil;
@@ -64,7 +65,11 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
         } else if (message.getType() == MsgType.TEXT) {
             Channel channel = NettyChannelMap.get(message.getTo());
             if (channel != null) {
-                channel.writeAndFlush(message.toJson());
+                channel.writeAndFlush(message.toJson()).addListener((ChannelFutureListener) future -> {
+                    if (!future.isSuccess()) {
+                        System.out.println("send msg to " + message.getTo() + " failed");
+                    }
+                });
             }
         }
         ReferenceCountUtil.release(msg);
