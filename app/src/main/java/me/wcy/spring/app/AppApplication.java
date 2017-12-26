@@ -1,5 +1,6 @@
 package me.wcy.spring.app;
 
+import me.wcy.spring.app.chat.PushServer;
 import me.wcy.spring.zipkin.EnableDubboTrace;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -16,5 +17,6 @@ public class AppApplication {
         SpringApplication.run(AppApplication.class, args);
 
         //ASRController.asr();
+        PushServer.start();
     }
 }
