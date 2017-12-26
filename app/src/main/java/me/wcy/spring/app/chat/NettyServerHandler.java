@@ -55,6 +55,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
                 message.setContent(loginInfo.toJson());
                 ctx.channel().writeAndFlush(message.toJson());
                 NettyChannelMap.add(loginInfo.getAccount(), ctx.channel());
+                System.out.println(loginInfo.getAccount() + " login");
             } else {
                 loginInfo.setResult(400);
                 message.setContent(loginInfo.toJson());

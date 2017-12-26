@@ -8,8 +8,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class NettyChannelMap {
     private static Map<String, Channel> map = new ConcurrentHashMap<>();
 
-    public static void add(String clientId, Channel channel) {
-        map.put(clientId, channel);
+    public static void add(String account, Channel channel) {
+        map.put(account, channel);
     }
 
     public static Channel get(String clientId) {
@@ -19,9 +19,9 @@ public class NettyChannelMap {
     public static void remove(Channel channel) {
         for (Map.Entry entry : map.entrySet()) {
             if (entry.getValue() == channel) {
-                String key = (String) entry.getKey();
-                map.remove(key);
-                System.out.println("socketChannel " + key + " removed");
+                String account = (String) entry.getKey();
+                map.remove(account);
+                System.out.println(account + " leave");
                 break;
             }
         }

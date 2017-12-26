@@ -28,7 +28,6 @@ deploy(){
     if [ -f $1 ];then
         echo "> Package Success $5!"
         cp -rf $1 $2
-        echo "> Copy Success $5!"
 
         #Start
         cd ${DEPLOY_PATH}
