@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
+    // 已注册的账号
     private Set<LoginInfo> loginInfos = new HashSet<>();
 
     public NettyServerHandler() {
@@ -25,11 +26,6 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
     }
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        super.channelActive(ctx);
-    }
-
-    @Override
     public void channelInactive(ChannelHandlerContext ctx) {
         // Channel失效，从Map中移除
         NettyChannelMap.remove(ctx.channel());
@@ -38,7 +34,6 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         super.exceptionCaught(ctx, cause);
-        System.out.println("exceptionCaught " + cause.getMessage());
     }
 
     @Override
@@ -65,6 +60,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<String> {
         } else if (message.getType() == MsgType.TEXT) {
             Channel channel = NettyChannelMap.get(message.getTo());
             if (channel != null) {
+                channel.isWritable();
                 channel.writeAndFlush(message.toJson()).addListener((ChannelFutureListener) future -> {
                     if (!future.isSuccess()) {
                         System.out.println("send msg to " + message.getTo() + " failed");
