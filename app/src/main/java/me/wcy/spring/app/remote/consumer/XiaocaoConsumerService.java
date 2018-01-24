@@ -2,12 +2,11 @@ package me.wcy.spring.app.remote.consumer;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import me.wcy.spring.remote.xiaocao.XiaocaoService;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by hzwangchenyan on 2017/11/8.
  */
-@Component
+//@Component
 public class XiaocaoConsumerService implements XiaocaoService {
     @Reference(version = "1.0.0")
     private XiaocaoService xiaocaoService;

@@ -1,10 +1,10 @@
 package me.wcy.spring.app;
 
+import com.alibaba.fastjson.JSON;
 import me.wcy.spring.app.kafka.KafkaMessage;
 import me.wcy.spring.app.kafka.KafkaProducer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class KafkaTest {
     private long id;
 
-    @Autowired
+    //@Autowired
     private KafkaProducer kafkaProducer;
 
     @Test
@@ -25,6 +25,6 @@ public class KafkaTest {
         message.setId(id++);
         message.setMsg("the message of id " + message.getId());
         message.setTime(System.currentTimeMillis());
-        // kafkaProducer.send(JSON.toJSONString(message));
+        kafkaProducer.send(JSON.toJSONString(message));
     }
 }

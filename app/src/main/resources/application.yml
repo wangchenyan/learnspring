@@ -15,19 +15,19 @@ spring:
     port: 6379
     password: wcy19930921
 
-  dubbo:
-    application:
-      name: app-consumer
-    registry:
-      address: zookeeper://localhost:2181
-    scan: me.wcy.spring.app.remote
+#  dubbo:
+#    application:
+#      name: app-consumer
+#    registry:
+#      address: zookeeper://localhost:2181
+#    scan: me.wcy.spring.app.remote
 
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: root
-    password: root
-    queue: MQQ
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: root
+#    password: root
+#    queue: MQQ
 
 #  kafka:
 #    bootstrap-servers: localhost:9092
