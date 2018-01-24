@@ -40,8 +40,8 @@ deploy(){
 
 #Stop
 killProcess learnspring.jar
-killProcess xiaocao.jar
-killProcess printer.jar
+#killProcess xiaocao.jar
+#killProcess printer.jar
 
 #Package
 cd ${PROJECT_PATH}
@@ -58,9 +58,9 @@ mvn install
 echo '> Package...'
 mvn package
 
-deploy ${JAR_PATH_PRINTER} ${DEPLOY_PATH_PRINTER} ${OUTPUT_PATH_PRINTER} 5007 'Printer'
-sleep 3s
-deploy ${JAR_PATH_XIAOCAO} ${DEPLOY_PATH_XIAOCAO} ${OUTPUT_PATH_XIAOCAO} 5006 'Xiaocao'
-sleep 3s
+#deploy ${JAR_PATH_PRINTER} ${DEPLOY_PATH_PRINTER} ${OUTPUT_PATH_PRINTER} 5007 'Printer'
+#sleep 3s
+#deploy ${JAR_PATH_XIAOCAO} ${DEPLOY_PATH_XIAOCAO} ${OUTPUT_PATH_XIAOCAO} 5006 'Xiaocao'
+#sleep 3s
 deploy ${JAR_PATH_APP} ${DEPLOY_PATH_APP} ${OUTPUT_PATH_APP} 5005 'App'
 sleep 3s
